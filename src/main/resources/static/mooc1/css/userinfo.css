@@ -1,0 +1,574 @@
+body, h1, h2, h3, h4, h5, h6, hr, p, dl, dt, dd, ul, ol, li, pre, button, input, textarea, th, td {
+    margin: 0;
+    padding: 0;
+}
+.headerwrap2 {
+    border-bottom: 3px solid #f5f5f5;
+    height: 154px;
+}
+.headerwrap {
+    height: 192px;
+    width: 100%;
+}
+.header2 {
+    border-bottom: 3px solid #f5f5f5;
+    height: 154px;
+}
+.header {
+    width: 100%;
+    height: 192px;
+    background: #fff;
+}
+.header .top {
+    height: 75px;
+    line-height: 38px;
+    background: #3a3a3a;
+    color: #fff;
+    width: 100%;
+}
+.wp {
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    clear: both;
+}
+.fl {
+    float: left!important;
+}
+strong, b {
+    font-weight: bold;
+}
+.header .top .personal {
+    height: auto;
+    float: right;
+    position: relative;
+}
+.header .top .user {
+    height: 30px;
+    line-height: 40px;
+    margin-top: 17px;
+    cursor: pointer;
+}
+.fr {
+    float: right!important;
+}
+.header .top .user dd {
+    float: right;
+    color: #fff;
+}
+.fr {
+    float: right!important;
+}
+.header .top .user dt {
+    margin-right: 20px;
+    width: 36px;
+    height: 36px;
+    margin-top: 5px;
+    background: #fff;
+    overflow: hidden;
+    border-radius: 50%;
+    float: right;
+}
+.header .top .userdetail {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 38px;
+    background: #fff;
+    padding: 10px;
+    z-index: 99;
+    border: 1px solid #ccc;
+    border-top: 0;
+}
+.header .top .userdetail dl {
+    width: 300px;
+    height: auto;
+    overflow: hidden;
+}
+.header .top .userdetail dt {
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    border-radius: 50%;
+    float: left;
+}
+.header .top .userdetail h2 {
+    color: #717171;
+}
+.header .top .userdetail .btn {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 20px;
+    clear: both;
+}
+.header .top .userdetail .btn a.fl {
+    width: 65%;
+}
+
+.header .top .userdetail .btn a {
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background: #717171;
+    color: #fff;
+}
+.fl {
+    float: left!important;
+}
+
+a {
+    text-decoration: none;
+}
+.header .top .userdetail .btn a.fr {
+    width: 32%;
+}
+
+.header .top .userdetail .btn a {
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background: #717171;
+    color: #fff;
+}
+
+.fr {
+    float: right!important;
+}
+
+a {
+    text-decoration: none;
+}
+.header .middle {
+    height: 116px;
+    width: 100%;
+    clear: both;
+}
+.header .middle .wp {
+    height: 100%;
+    background: url(../images/header_middle.png) no-repeat right 10px;
+}
+
+.wp {
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    clear: both;
+}
+a {
+    text-decoration: none;
+}
+.header2 h1 {
+    font-weight: bold;
+    padding-left: 20px;
+    margin-left: 50px;
+    border-left: 1px solid #e1e1e1;
+    font-size: 30px;
+    float: left;
+    height: 45px;
+    line-height: 45px;
+    margin-top: 40px;
+}
+.wp {
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    clear: both;
+}
+.crumbs {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    color: #454545;
+    letter-spacing: 2px;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+.crumbs li {
+    float: left;
+}
+.crumbs a {
+    color: #7f7f7f;
+}
+
+a {
+    text-decoration: none;
+}
+
+.personal_list {
+    margin-top: 0;
+}
+
+.list {
+    height: auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    min-height: 200px;
+    overflow: hidden;
+    clear: both;
+    position: relative;
+}
+
+.wp {
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    clear: both;
+}
+.personal_list .left {
+    width: 210px;
+    float: left;
+    background: #f8f8f8;
+    border: 1px solid #eaeaea;
+    overflow: hidden;
+}
+
+.list .left {
+    width: 900px;
+    float: left;
+}
+
+ul, ol {
+    list-style: none;
+}
+.personal_list .left li:hover, .personal_list .left .active2 {
+    background: #fff url(../images/arrow_g.png) no-repeat 95% center;
+    border-left: 2px solid #717171;
+}
+
+.personal_list .left li {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    font-size: 16px;
+    color: #3a3a3a;
+    border-bottom: 1px solid #eaeaea;
+    background: url(../images/arrow.png) no-repeat 95% center;
+}
+
+.active2 {
+    color: #3d9328 !important;
+}
+.personal_list .left a {
+    width: 90%;
+    margin: 0 5%;
+    height: 100%;
+    display: block;
+    color: #3a3a3a;
+}
+
+a {
+    text-decoration: none;
+}
+.personal_list .right {
+    width: 945px;
+    float: right;
+    overflow: hidden;
+}
+
+.list .right {
+    width: 280px;
+    float: right;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+.personal_des .head {
+    border-bottom: 1px solid #eaeaea;
+    background: #f8f8f8;
+}
+
+.list .layout .head, .personal_des .head {
+    border-bottom: 1px solid #eaeaea;
+    background: #f8f8f8;
+    color: #333;
+    height: 50px;
+    line-height: 50px;
+    text-indent: 20px;
+    font-size: 14px;
+}
+.personal_list .head h1 {
+    display: inline;
+    color: #717171;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    color: #202020;
+}
+
+h1 {
+    font-size: 18px;
+}
+.personal_des .inforcon {
+    border: 1px solid #eaeaea;
+    height: auto;
+    overflow: hidden;
+    width: 943px;
+    border-top: 0;
+}
+
+.personal_des .inforcon .left {
+    float: left;
+    width: 230px;
+    height: 100%;
+    text-align: center;
+    border: 0;
+    background: none;
+}
+
+.personal_list .left {
+    width: 210px;
+    float: left;
+    background: #f8f8f8;
+    border: 1px solid #eaeaea;
+    overflow: hidden;
+}
+
+.list .left {
+
+    float: left;
+}
+form {
+    display: block;
+    margin-top: 0em;
+}
+label {
+    cursor: default;
+}
+.personal_des .inforcon .left .pic {
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #eee;
+    margin: 50px auto 20px;
+}
+.list span {
+    color: #9f9f9f;
+}
+.personal_des .inforcon .left .pic img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.changearea .upload-inp-box {
+    margin: 0 65px;
+}
+
+.list span {
+    color: #9f9f9f;
+}
+
+.upload-inp-box {
+    position: relative;
+    overflow: hidden;
+}
+
+.fl {
+    float: left!important;
+}
+.upload-inp-box input[type=file] {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 35px;
+    opacity: 0;
+    filter: Alpha(opacity=0);
+    cursor: pointer;
+}
+
+input, textarea {
+    text-indent: 2px;
+    border: 1px solid #ccc;
+}
+.personal_list .inforcon .right {
+    width: 700px !important;
+    height: 100%;
+    border-left: 1px solid #eaeaea;
+    font-size: 14px;
+    margin: 0;
+}
+
+.personal_list .right {
+    width: 945px;
+    float: right;
+    overflow: hidden;
+}
+
+
+.list .right {
+
+    float: right;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+.personal_list .inforcon .right > li {
+    float: left;
+    width: 100%;
+}
+
+.personal_list .inforcon .right > li, .inputs li {
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #eaeaea;
+    text-indent: 20px;
+    color: #a9a9a9;
+    position: relative;
+}
+.personal_list .inforcon .right li input[type=text] {
+    color: #3d3d3d;
+    height: 30px;
+    line-height: 30px;
+    margin-left: 20px;
+    text-indent: 10px;
+    width: 300px;
+    background: #fafafa;
+}
+
+.personal_list .inforcon .right li input[type=text] {
+    color: #3d3d3d;
+    height: 30px;
+    line-height: 30px;
+    margin-left: 20px;
+    text-indent: 10px;
+    width: 300px;
+    background: #fafafa;
+}
+.error-tips {
+    display: none;
+    color: #f00;
+}
+.personal_list .inforcon .right .button {
+    text-align: center;
+}
+
+.personal_list .inforcon .right > li {
+    float: left;
+    width: 100%;
+}
+.personal_list .inforcon .right .button input {
+    cursor: pointer;
+    background: #717171;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    border: 0;
+    height: 35px;
+    width: 100px;
+    margin: 0 auto;
+}
+
+.heibtn {
+    height: 150px !important;
+    border-bottom: 0 !important;
+}
+.heibtn input {
+    margin-top: 50px !important;
+}
+
+input, textarea {
+    text-indent: 2px;
+    border: 1px solid #ccc;
+}
+.button {
+    display: block;
+    height: 35px;
+    line-height: 35px;
+    margin: 0 auto;
+    border: 0;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    color: #fff !important;
+    cursor: pointer;
+    text-align: center;
+    text-indent: 0 !important;
+}
+
+.btn-green {
+    background: #717171;
+}
+
+.btn-green:hover {
+    background: #5dbf45;
+}
+
+.btn-w100 {
+    width: 100px;
+}
+
+.btn-hei30 {
+    height: 30px;
+    line-height: 30px;
+}
+
+.btn-unedit {
+    color: #dfdfdf !important;
+}
+
+.btn-diabled {
+    background: #ccc !important;
+    color: #fff !important;
+}
+
+.btn-hkpay{
+    width:200px;
+    margin: 0 auto 60px;
+}
+
+/**上传**/
+
+.hei100 {
+    height: 100px !important;
+}
+
+.upload-image-box {
+    display: block;
+    width: auto !important;
+    height: 50px;
+    margin: 25px 20px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.pic-box {
+    line-height: normal;
+}
+
+.upload-inp-box {
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-inp-box .button {
+    margin: 8px 25px;
+}
+
+.upload-inp-box .btn-mar0 {
+    margin: 0
+}
+
+.upload-inp-box input[type=file] {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 35px;
+    opacity: 0;
+    filter: Alpha(opacity=0);
+    cursor: pointer;
+}
+
+.changearea .upload-inp-box {
+    margin: 0 65px;
+}
+
+.changearea .button {
+    margin: 0;
+}
+.btn-w100 {
+    width: 100px;
+}

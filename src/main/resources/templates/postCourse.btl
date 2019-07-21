@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <title>课程发布页面</title>
+    <base href="${request.scheme+'://'+request.serverName+':'+request.serverPort+'/'+ctxPath}"/>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+    <link type="text/css" href="/mooc/css/post.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/editor.md-master/examples/css/style.css" />
+    <link type="text/css" rel="stylesheet" href="/editor.md-master/css/editormd.css" />
+
+
+</head>
+<body>
+
+    <div id="main">
+        <div class="article-wrap">
+            <a href="/course" style="float: left;">返回</a>
+            <!-- article title -->
+            <h2 class="article-title" style="left: auto">发布课程内容</h2>
+            <!-- article content -->
+            <div class="article-form">
+                <form  method="post" action="/post/post1" id="user-form" enctype="multipart/form-data">
+                <!-- 标题 -->
+                    <!--<div class="form-group js-title">-->
+                        <!--<span class="needed"><i>*</i>章名称</span><span class="err-tip"></span>-->
+                        <!--<div class="form-ipt-wrap clearfix">-->
+                            <!--<select id="chapter.id" name="chapter.id" class="form-control">-->
+                                <!--<option value="0">请选择章节名</option>-->
+
+                                <!--<% for(chapter in chapters){ %>-->
+                                <!--<option value="${chapter.id}">${chapter.chapter_name}</option>-->
+
+                                <!--<% } %>-->
+                            <!--</select>-->
+
+                        <!--</div>-->
+                    <!--</div>-->
+                <div class="form-group js-title">
+                    <!--<span class="needed"><i>*</i>节名称</span><span class="err-tip"></span>-->
+                    <div class="form-ipt-wrap clearfix">
+                        <input type="text" id="section_name" name="section_name" class="art-title" placeholder="请输入标题" />
+                    </div>
+                </div>
+                    <div class="form-group js-title">
+                        <!--<span class="needed"><i>*</i>节名称</span><span class="err-tip"></span>-->
+                        <div class="form-ipt-wrap clearfix">
+                            <input type="text"  name="section_name" class="art-title" placeholder="请输入类别" />
+                        </div>
+                    </div>
+                    <div class="form-group js-title">
+                        <!--<span class="needed"><i>*</i>节名称</span><span class="err-tip"></span>-->
+                        <div class="form-ipt-wrap clearfix">
+                            <input type="text"  name="section_name" class="art-title" placeholder="请输入描述" />
+                        </div>
+                    </div>
+                <!-- 编辑 -->
+                <div class="form-group clearfix js-editor-box">
+                    <span class="needed"><i>*</i>文章正文</span><span class="err-tip"></span>
+                    <div id="testeditormd"></div>
+                </div>
+                <!-- 视频上传 -->
+                <!--<div class="form-group row" style="margin-bottom: 0px;">-->
+                    <!--<label class="col-2 col-form-label" style="font-weight:bold;font-size: large;color:#0e0f18;">视频上传:</label>-->
+                    <!--<input type="file" id="files" name="files" class="form-control" multiple>-->
+                <!--</div>-->
+                <!-- 发布 -->
+                <div class="form-group form-bottom clearfix">
+                    <div class="r">
+                        <div class="captcha-verify-box js-verify-box hide"></div>
+                        <button id="js-submit" class="issue-btn" type="button">发表</button>
+                        <span class="submit-tip js-submit-tip"></span>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<script src="/editor.md-master/examples/js/jquery.min.js"></script>
+<script src="/editor.md-master/editormd.js"></script>
+
+
+<script type="text/javascript">
+    var booleanfile=false;
+    var testEditor;
+    $(function () {
+        testEditor = editormd("testeditormd", {
+            width: "97%",
+            height: 320,
+            syncScrolling: "single",
+            path: 'editor.md-master/lib/',
+            saveHTMLToTextarea: true,
+            imageUpload: true,
+            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL: "/post/upload"
+        });
+    });
+
+    $("#files").click(function () {
+            booleanfile=true;
+    });
+
+    $("#js-submit").click(function () {
+        var form=document.getElementById("user-form")
+        var formData=new FormData(form);
+        var files = document.getElementById("files");
+        for(var i = 0; i < files.files.length; i++) {
+            var file = files.files[i];
+            formData.append('files', file, file.name);
+        }
+        formData.set("booleanfile",booleanfile);
+        $.ajax({
+            type: "POST",
+            url: "/post/post1",
+            data: formData,
+            async: true,
+            processData : false,
+            contentType : false ,//必须false才会自动加上正确的Content-Type
+            success: function(result){
+                window.location.replace(result);
+            }
+        });
+
+    });
+</script>
+</body>
+</html>

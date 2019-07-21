@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <base href="${request.scheme+'://'+request.serverName+':'+request.serverPort+'/'+ctxPath}"/>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>内容页</title>
+<link rel="alternate" type="application/rss+xml" title="egrappler.com" href="feed/index.html">
+<link href="http://fonts.googleapis.com/css?family=Raleway:700,300" rel="stylesheet"
+        type="text/css">
+<link rel="stylesheet" href="doc-template/css/style.css">
+<link rel="stylesheet" href="doc-template/css/prettify.css">
+  <link rel="stylesheet" type="text/css" href="/mooc1/css/userinfo.css">
+  <link rel="stylesheet" href="/mooc/css/course_list.css">
+  <link rel="stylesheet" href="/mooc/css2/mooc.css">
+</head>
+<body>
+<div class=" headerwrap2">
+  <header>
+    <div  class="header2 header">
+      <div class="top">
+        <div class="wp">
+          <ul class="nav-item">
+            <li class="set-btn visible-xs-block"><a href="/user/newlogin" target="_self">登录</a> / <a
+                    href="/user/newsignup" target="_self">注册</a></li>
+            <li>
+              <a href="/courseList" class="active" target="_self">免费课程</a>
+            </li>
+            <li>
+              <a href="//coding.imooc.com" target="_self">实战</a>
+            </li>
+            <li><a href="/article" target="_self">笔记</a></li>
+            <li><a href="/upload?id=${section.id}" target="_self">视频上传</a></li>
+          </ul>
+          <!--登录后跳转-->
+
+
+          <div class="personal">
+            <dl class="user fr">
+              <dd> 11<img class="down fr" src="/mooc1/images/top_down.png"/></dd>
+
+              <dt><img width="36" height="36" src="/img/avatars/1.jpg"/></dt>
+            </dl>
+            <div class="userdetail">
+              <dl>
+                <dt><img width="80" height="80" src="/img/avatars/1.jpg"/></dt>
+                <dd>
+                  <h2>11</h2>
+                </dd>
+              </dl>
+              <div class="btn">
+                <a class="personcenter fl" href="/userinfo">进入个人中心</a>
+                <a class="fr" href="/login">退出</a>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+
+<section style="margin-left:-300px">
+  <div class="container" >
+    <div class="docs-content">
+      <h2 style="text-align: center;"> ${section.section_name}</h2>
+      <p> ${section.section_content}<a href="${section.link}">${section.link}</a></p>
+      <h2 style="text-align: center;" ><img/><img src="${section.picture}"></h2>
+  </div>
+  </div>
+</section>
+<section class="vibrant centered" style="margin-top:150px ">
+  <div class="container" >
+    <h4> 本页面由第一小组成员设计完成 </h4>
+    <a type="button" class="btn btn-danger" href="/video?id=${section.id}">
+      视频教学
+    </a>
+  </div>
+</section>
+<footer>
+  <div class="container">
+    <p> &copy; 2018 This page is designed by the first group member </p>
+  </div>
+</footer>
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/prettify/prettify.js"></script> 
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&skin=sunburst"></script>
+<script src="js/layout.js"></script>
+ <script src="js/jquery.localscroll-1.2.7.js" type="text/javascript"></script>
+ <script src="js/jquery.scrollTo-1.4.3.1.js" type="text/javascript"></script>
+</body>
+</html>
