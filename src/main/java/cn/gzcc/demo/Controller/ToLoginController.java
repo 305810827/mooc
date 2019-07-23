@@ -10,12 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Objects;
 
 @RestController
 public class ToLoginController {
@@ -31,13 +29,17 @@ public class ToLoginController {
     }
 
     @RequestMapping(value = "/toLogin", method = RequestMethod.POST)
-    public ResultMap login(@Valid RequestLoginUser requestLoginUser, BindingResult bindingResult) {
+    public ResultMap login(@RequestBody RequestLoginUser requestLoginUser, BindingResult bindingResult) {
         // 检查有没有输入用户名密码和格式对不对
+        System.out.println("requestLoginUser"+requestLoginUser.getUsername());
+
         if (bindingResult.hasErrors()) {
             return new ResultMap().fail("400").message("缺少参数或者参数格式不对").data("");
         }
 
         LoginDetail loginDetail = loginService.getLoginDetail(requestLoginUser.getUsername());
+        System.out.println(loginDetail+"loginDetail");
+
         ResultMap ifLoginFail = checkAccount(requestLoginUser, loginDetail);
         if (ifLoginFail != null) {
             return ifLoginFail;

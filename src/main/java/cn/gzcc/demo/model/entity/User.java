@@ -24,12 +24,11 @@ public class User implements LoginDetail, TokenDetail {
     private char enable;
 
 
-   @ManyToOne
-   private Role role;
 
-    public String getPhone(){
+
+    public String getPhone() {
         return phone;
-            }
+    }
 
     public void setPhone(String phone) {
         this.phone = phone;
@@ -68,14 +67,14 @@ public class User implements LoginDetail, TokenDetail {
         this.address = address;
     }
 
-    public String getName() {
-        return name;
+    public String getName() { return name; }
 
-    }
     public void setName(String name) {
         this.name = name;
     }
 
+    @ManyToOne
+    private Role role;
 
     public Role getRole() {
         return role;
@@ -133,7 +132,7 @@ public class User implements LoginDetail, TokenDetail {
 
     @Override
     public boolean enable() {
-        if (this.enable == '1'){
+        if (this.enable == '1') {
             return true;
         }
         return false;

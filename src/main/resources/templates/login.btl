@@ -1,150 +1,173 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-  <base href="${request.scheme+'://'+request.serverName+':'+request.serverPort+'/'+ctxPath}"/>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="CoreUI Bootstrap 4 Admin Template">
-  <meta name="author" content="Lukasz Holeczek">
-  <meta name="keyword" content="CoreUI Bootstrap 4 Admin Template">
-  <!-- <link rel="shortcut icon" href="assets/ico/favicon.png"> -->
+    <base href="${request.scheme+'://'+request.serverName+':'+request.serverPort+'/'+ctxPath}"/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="CoreUI Bootstrap 4 Admin Template">
+    <meta name="author" content="Lukasz Holeczek">
+    <meta name="keyword" content="CoreUI Bootstrap 4 Admin Template">
+    <!-- <link rel="shortcut icon" href="assets/ico/favicon.png"> -->
 
-  <title>CoreUI Bootstrap 4 Admin Template</title>
+    <title>CoreUI Bootstrap 4 Admin Template</title>
 
-  <!-- Icons -->
-  <link href="vendors/css/font-awesome.min.css" rel="stylesheet">
-  <link href="vendors/css/simple-line-icons.min.css" rel="stylesheet">
+    <!-- Icons -->
+    <link href="vendors/css/font-awesome.min.css" rel="stylesheet">
+    <link href="vendors/css/simple-line-icons.min.css" rel="stylesheet">
 
-  <!-- Main styles for this application -->
-  <link href="css/style.css" rel="stylesheet">
+    <!-- Main styles for this application -->
+    <link href="css/style.css" rel="stylesheet">
 
-  <!-- Styles required by this views -->
+    <!-- Styles required by this views -->
 
 </head>
 
 <body class="app flex-row align-items-center">
 <div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="card-group">
-        <div class="card p-4">
-          <div class="card-body">
-            <h1>iCollege</h1>
-            <p class="text-muted">知名学习平台</p>
-            <form action="/login" method="post">
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="icon-user"></i></span>
-                </div>
-                <input type="text" id="username" name="username" class="form-control" placeholder="账号">
-              </div>
-              <div class="input-group mb-4">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="icon-lock"></i></span>
-                </div>
-                <input type="password"  name="password" class="form-control" placeholder="密码">
-              </div>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card-group">
+                <div class="card p-4">
+                    <div class="card-body">
+                        <h1>iCollege</h1>
+                        <p class="text-muted">知名学习平台</p>
+                        <form id="loginForm">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="icon-user"></i></span>
+                                </div>
+                                <input type="text" id="username" name="username" class="form-control" placeholder="账号">
+                            </div>
+                            <div class="input-group mb-4">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="icon-lock"></i></span>
+                                </div>
+                                <input type="password" id="password" name="password" class="form-control"
+                                       placeholder="密码">
+                            </div>
 
-              <div class="row">
-                <div class="col-6">
-                  <button type="submit" class="btn btn-primary px-4">登陆</button>
-                </div>
-                <div class="col-6 text-right">
-                  <button type="button"  class="btn btn-info" data-toggle="modal" data-target="#infoModal">
-                    立即注册
-                  </button>
-                </div>
+                            <table id="loginRole" border="0">
+                                <tbody>
+                                <tr>
+                                    <td><input type="radio" name="role.id" value="1">
+                                        教师
+                                    </td>
+                                    <td><input type="radio" name="role.id" value="2">
+                                        学生
+                                    </td>
+                                    <td><input type="radio" name="role.id" value="3">
+                                        管理员
+                                    </td>
+                                </tbody>
+                            </table>
 
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
-          <div class="card-body text-center">
-            <div>
-              <h2 style="padding-top: 50px;">iCollege学习平台</h2>
-              <p>最好的学习平台，你值得拥有</p>
+                            <div class="row">
+                                <div class="col-6">
+                                    <button type="submit" class="btn btn-primary px-4">登陆</button>
+                                </div>
+                                <div class="col-6 text-right">
+                                    <button type="button" class="btn btn-info" data-toggle="modal"
+                                            data-target="#infoModal">
+                                        立即注册
+                                    </button>
+                                </div>
 
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
+                    <div class="card-body text-center">
+                        <div>
+                            <h2 style="padding-top: 50px;">iCollege学习平台</h2>
+                            <p>最好的学习平台，你值得拥有</p>
+
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-info" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">用户信息</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form  id="user-form"   method="post">
-          <div class="alert alert-danger" id="exist_alert" role="alert">
-            <strong>用户已存在</strong>
-          </div>
-          <div class="alert alert-success" id="noexist_alert" role="alert">
-            <strong>用户可使用</strong>
-          </div>
-          <div class="alert alert-success" id="backlogin" role="alert">
-            <strong>请返回到登录页面</strong>
-          </div>
-          <div class="form-group">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fa fa-user"></i></span></div>
-              <input type="text" id="name" name="name" class="form-control" placeholder="用户名">
-
+    <div class="modal-dialog modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">用户信息</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
             </div>
-          </div>
-          <div class="form-group">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fa fa-asterisk"></i></span>
-              </div>
-              <input type="password" id="password1" name="password" class="form-control" placeholder="输入密码">
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fa fa-asterisk"></i></span>
-              </div>
+            <div class="modal-body">
+                <form id="user-form" method="post">
+                    <div class="alert alert-danger" id="exist_alert" role="alert">
+                        <strong>用户已存在</strong>
+                    </div>
+                    <div class="alert alert-success" id="noexist_alert" role="alert">
+                        <strong>用户可使用</strong>
+                    </div>
+                    <div class="alert alert-success" id="backlogin" role="alert">
+                        <strong>请返回到登录页面</strong>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-user"></i></span></div>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="用户名">
 
-              <input type="password" id="password2" name="password2" class="form-control" placeholder="再次输入密码">
-            </div>
-          </div>
-          <!--<div class="form-group">-->
-            <!--<div class="input-group">-->
-              <!--<div class="input-group-prepend">-->
-                <!--<span class="input-group-text"><i class="fa fa-phone"></i></span>-->
-              <!--</div>-->
-              <!--<input type="text" id="phone" name="phone" class="form-control" placeholder="电话" pattern="^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$">-->
-              <!--<span id="phonecheck"></span>-->
-            <!--</div>-->
-          <!--</div>-->
-          <table id="role" border="0">
-              <tbody>
-            <tr>
-              <td><input  type="radio" name="role.id" value="1" >
-                教师</td>
-              <td><input  type="radio" name="role.id" value="2" >
-                学生</td>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-asterisk"></i></span>
+                            </div>
+                            <input type="password" id="password1" name="password1" class="form-control"
+                                   placeholder="输入密码">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-asterisk"></i></span>
+                            </div>
 
-            </tbody></table>
-      <div class="modal-footer">
-        <button  id="button1"  class="btn btn-info">保存</button>
-        <button type="button"  class="btn btn-secondary" data-dismiss="modal">取消</button>
-      </div>
-      </form>
+                            <input type="password" id="password2" name="password2" class="form-control"
+                                   placeholder="再次输入密码">
+                        </div>
+                    </div>
+                    <!--<div class="form-group">-->
+                    <!--<div class="input-group">-->
+                    <!--<div class="input-group-prepend">-->
+                    <!--<span class="input-group-text"><i class="fa fa-phone"></i></span>-->
+                    <!--</div>-->
+                    <!--<input type="text" id="phone" name="phone" class="form-control" placeholder="电话" pattern="^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$">-->
+                    <!--<span id="phonecheck"></span>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <table id="role" border="0">
+                        <tbody>
+                        <tr>
+                            <td><input type="radio" name="role.id" value="1">
+                                教师
+                            </td>
+                            <td><input type="radio" name="role.id" value="2">
+                                学生
+                            </td>
+
+                        </tbody>
+                    </table>
+                    <div class="modal-footer">
+                        <button id="button1" class="btn btn-info">保存</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
 </div>
 
 <!-- Bootstrap and necessary plugins -->
@@ -156,89 +179,94 @@
 
 
 <script src="js/app.js"></script>
-<script src ="js/art-template-web.js"></script>
+<script src="js/art-template-web.js"></script>
+<script src="mooc/login.js"></script>
 
-
-  <script type="text/javascript" language="javascript">
-      $(document).ready(function () {
-           $("#exist_alert").hide();
-          $("#noexist_alert").hide();
-            $("#backlogin").hide();
-            $("#name").blur(function () {
-                var name=$("#name").val();
-                $.ajax({
-                    type:"POST",
-                    url:"/toLogin",
-                    data:{"name":name},
-                    success:function (msg) {
-                        if(msg=="enable")
-                        {
-                            $("#noexist_alert").show();
-                        }
-                        else{
-                            $("#exist_alert").show();
-                        }
+<script type="text/javascript" language="javascript">
+    $(document).ready(function () {
+        $("#exist_alert").hide();
+        $("#noexist_alert").hide();
+        $("#backlogin").hide();
+        $("#name").blur(function () {
+            var name = $("#name").val();
+            $.ajax({
+                type: "POST",
+                url:"/user/check",
+                data:{"name":name},
+                success: function (msg) {
+                    if (msg == "enable") {
+                        $("#noexist_alert").show();
+                    } else {
+                        $("#exist_alert").show();
                     }
-                })
-                if(name==""){
-                    alert("用户名不能为空！！！");
-//                    document.getElementById("name").focus();//通过元素的ID特性来获取元素
-                    return false;
                 }
-                $("input").click(function () {
-                    $("#noexist_alert").hide();
-                    $("#exist_alert").hide();
-                });
             })
+            if (name == "") {
+                alert("用户名不能为空！！！");
+//                    document.getElementById("name").focus();//通过元素的ID特性来获取元素
+                return false;
+            }
+            $("input").click(function () {
+                $("#noexist_alert").hide();
+                $("#exist_alert").hide();
+            });
+            if (password == "") {
+                alert("密码不能为空！！！");
+//                    document.getElementById("name").focus();//通过元素的ID特性来获取元素
+                return false;
+            }
+            $("input").click(function () {
+                $("#noexist_alert").hide();
+                $("#exist_alert").hide();
+            });
+        })
 
-          $("#button1").click(function () {
-              var name=$("#name").val();
-              var password1=$("#password1").val();
-              var password2=$("#password2").val();
-              var role=$("#role").val();
+        $("#button1").click(function () {
+            var name = $("#name").val();
+            var password1 = $("#password1").val();
+            var password2 = $("#password2").val();
+            var role = $("#role").val();
 //              var phone = document.getElementById('phone').value;
 //              var user = {name:name,password:password1,role:[{id:role}],phone:phone};
 //              var userJson = JSON.stringify(user);
-              if(password1==""){
-                  alert("密码不能为空！！！");
+            if (password1 == "") {
+                alert("密码不能为空！！！");
 //                  document.getElementById("password1").focus();
-                  return false;
-              }
-              if(password2==""){
-                  alert("密码不能为空！！！");
+                return false;
+            }
+            if (password2 == "") {
+                alert("密码不能为空！！！");
 //                  document.getElementById("password2").focus();
-                  return false;
-              }
+                return false;
+            }
 
 
-              if(password1!=password2){
-                  alert("两次密码不一致！！！");
+            if (password1 != password2) {
+                alert("两次密码不一致！！！");
 //                  document.getElementById("password2").focus();
-                  return false;
-              }
-              $.ajax({
-                  type:"POST",
-                  url:"/user/save",
-                  data:$('#user-form').serialize(),
+                return false;
+            }
+            $.ajax({
+                type: "POST",
+                url: "/user/save",
+                data: $('#user-form').serialize(),
 
-                  success:function (msg) {
-                      if(msg=="success")
-                      {
-                          $("#backlogin").show();
-                      }
+                success: function (msg) {
+                    if (msg == "success") {
+                        $("#backlogin").show();
+                    }
 
-
-                  }
+                }
 
 
-              })
+            })
 
 
-          });
+        });
 
 
-      });
-  </script>
+    });
+</script>
 
 
 </body>

@@ -3,6 +3,7 @@ package cn.gzcc.demo.utils;
 
 import cn.gzcc.demo.model.TokenDetail;
 import cn.gzcc.demo.model.UserDetailImpl;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -10,11 +11,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import io.jsonwebtoken.Clock;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.function.Function;
+import io.jsonwebtoken.impl.DefaultClock;
 /**
  * @version V1.0.0
  * @Description token 操作类
@@ -22,7 +26,10 @@ import java.util.Map;
  * @Date 2017/10/3 0:41
  */
 @Component
-public class TokenUtils {
+public class TokenUtils implements Serializable {
+
+    @SuppressFBWarnings(value = "SE_BAD_FIELD", justification = "It's okay here")
+    private Clock clock = DefaultClock.INSTANCE;
 
     @Value("${token.secret}")
     private String secret;
@@ -31,16 +38,14 @@ public class TokenUtils {
     private Long expiration;
 
     /**
-     * 根据 TokenDetail 生成 Token
+     * 根据 userDetails 生成 Token
      *
      * @param tokenDetail
      * @return
      */
     public String generateToken(TokenDetail tokenDetail) {
-        Map<String, Object> claims = new HashMap<String, Object>();
-        claims.put("sub", tokenDetail.getUsername());
-        claims.put("created", this.generateCurrentDate());
-        return this.generateToken(claims);
+        Map<String, Object> claims = new HashMap<>();
+        return doGenerateToken(claims, tokenDetail.getUsername());
     }
 
     /**
@@ -49,21 +54,17 @@ public class TokenUtils {
      * @param claims
      * @return
      */
-    private String generateToken(Map<String, Object> claims) {
-        try {
-            return Jwts.builder()
-                    .setClaims(claims)
-                    .setExpiration(this.generateExpirationDate())
-                    .signWith(SignatureAlgorithm.HS512, this.secret.getBytes("UTF-8"))
-                    .compact();
-        } catch (UnsupportedEncodingException ex) {
-            //didn't want to have this method throw the exception, would rather log it and sign the token like it was before
-            return Jwts.builder()
-                    .setClaims(claims)
-                    .setExpiration(this.generateExpirationDate())
-                    .signWith(SignatureAlgorithm.HS512, this.secret)
-                    .compact();
-        }
+    private String doGenerateToken(Map<String, Object> claims, String subject) {
+        final Date createdDate = clock.now();
+        final Date expirationDate = calculateExpirationDate(createdDate);
+
+        return Jwts.builder()
+                .setClaims(claims)
+                .setSubject(subject)
+                .setIssuedAt(createdDate)
+                .setExpiration(expirationDate)
+                .signWith(SignatureAlgorithm.HS512, secret)
+                .compact();
     }
 
     /**
@@ -71,8 +72,8 @@ public class TokenUtils {
      *
      * @return
      */
-    private Date generateExpirationDate() {
-        return new Date(System.currentTimeMillis() + this.expiration * 1000);
+    private Date calculateExpirationDate(Date createdDate) {
+        return new Date(createdDate.getTime() + expiration * 1000);
     }
 
     /**
@@ -91,14 +92,7 @@ public class TokenUtils {
      * @return
      */
     public String getUsernameFromToken(String token) {
-        String username;
-        try {
-            final Claims claims = this.getClaimsFromToken(token);
-            username = claims.getSubject();
-        } catch (Exception e) {
-            username = null;
-        }
-        return username;
+        return getClaimFromToken(token, Claims::getSubject);
     }
 
     /**
@@ -107,17 +101,15 @@ public class TokenUtils {
      * @param token
      * @return
      */
-    private Claims getClaimsFromToken(String token) {
-        Claims claims;
-        try {
-            claims = Jwts.parser()
-                    .setSigningKey(this.secret.getBytes("UTF-8"))
-                    .parseClaimsJws(token)
-                    .getBody();
-        } catch (Exception e) {
-            claims = null;
-        }
-        return claims;
+    public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = getAllClaimsFromToken(token);
+        return claimsResolver.apply(claims);
+    }
+    private Claims getAllClaimsFromToken(String token) {
+        return Jwts.parser()
+                .setSigningKey(secret)
+                .parseClaimsJws(token)
+                .getBody();
     }
 
     /**
@@ -128,9 +120,14 @@ public class TokenUtils {
      */
     public Boolean validateToken(String token, UserDetails userDetails) {
         UserDetailImpl user = (UserDetailImpl) userDetails;
-        final String username = this.getUsernameFromToken(token);
-        final Date created = this.getCreatedDateFromToken(token);
-        return (username.equals(user.getUsername()) && !(this.isTokenExpired(token)) && !(this.isCreatedBeforeLastPasswordReset(created, user.getLastPasswordReset())));
+        final String username = getUsernameFromToken(token);
+        final Date created = getIssuedAtDateFromToken(token);
+        //final Date expiration = getExpirationDateFromToken(token);
+        return (
+                username.equals(user.getUsername())
+                        && !isTokenExpired(token)
+                        && !isCreatedBeforeLastPasswordReset(created, user.getLastPasswordReset())
+        );
     }
 
     /**
@@ -138,16 +135,10 @@ public class TokenUtils {
      * @param token
      * @return
      */
-    public Date getCreatedDateFromToken(String token) {
-        Date created;
-        try {
-            final Claims claims = this.getClaimsFromToken(token);
-            created = new Date((Long) claims.get("created"));
-        } catch (Exception e) {
-            created = null;
-        }
-        return created;
+    public Date getIssuedAtDateFromToken(String token) {
+        return getClaimFromToken(token, Claims::getIssuedAt);
     }
+
 
     /**
      * 获得我们封装在 token 中的 token 过期时间
@@ -155,14 +146,7 @@ public class TokenUtils {
      * @return
      */
     public Date getExpirationDateFromToken(String token) {
-        Date expiration;
-        try {
-            final Claims claims = this.getClaimsFromToken(token);
-            expiration = claims.getExpiration();
-        } catch (Exception e) {
-            expiration = null;
-        }
-        return expiration;
+        return getClaimFromToken(token, Claims::getExpiration);
     }
 
     /**
@@ -171,8 +155,8 @@ public class TokenUtils {
      * @return
      */
     private Boolean isTokenExpired(String token) {
-        final Date expiration = this.getExpirationDateFromToken(token);
-        return expiration.before(this.generateCurrentDate());
+        final Date expiration = getExpirationDateFromToken(token);
+        return expiration.before(clock.now());
     }
 
     /**
@@ -183,5 +167,29 @@ public class TokenUtils {
      */
     private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
         return (lastPasswordReset != null && created.before(lastPasswordReset));
+    }
+
+    public Boolean canTokenBeRefreshed(String token, Date lastPasswordReset) {
+        final Date created = getIssuedAtDateFromToken(token);
+        return !isCreatedBeforeLastPasswordReset(created, lastPasswordReset)
+                && (!isTokenExpired(token) || ignoreTokenExpiration(token));
+    }
+
+    public String refreshToken(String token) {
+        final Date createdDate = clock.now();
+        final Date expirationDate = calculateExpirationDate(createdDate);
+
+        final Claims claims = getAllClaimsFromToken(token);
+        claims.setIssuedAt(createdDate);
+        claims.setExpiration(expirationDate);
+
+        return Jwts.builder()
+                .setClaims(claims)
+                .signWith(SignatureAlgorithm.HS512, secret)
+                .compact();
+    }
+    private Boolean ignoreTokenExpiration(String token) {
+        // here you specify tokens, for that the expiration is ignored
+        return false;
     }
 }

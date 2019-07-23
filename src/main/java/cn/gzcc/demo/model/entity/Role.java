@@ -10,39 +10,40 @@ import java.util.List;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String name;
-    private String descriptin;
+    private int roleId;
+    private String roleName;
+    private String auth;
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    @JsonBackReference
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    @JsonBackReference
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public String getAuth() {
+        return auth;
+    }
+
+    @JsonBackReference
+    public void setAuth(String auth) {
+        this.auth = auth;
+    }
+
 
     @OneToMany(mappedBy = "role")
     private List<User> users =new ArrayList<>();
-
-    public int getId() {
-        return id;
-    }
-
-    @JsonBackReference
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    @JsonBackReference
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescriptin() {
-        return descriptin;
-    }
-
-    @JsonBackReference
-    public void setDescriptin(String descriptin) {
-        this.descriptin = descriptin;
-    }
 
     public List<User> getUsers() {
         return users;
