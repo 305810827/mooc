@@ -36,13 +36,23 @@ public class UserController {
     private UserRepository userRepository;
 
     @RequestMapping
-    public ModelAndView userList() {
-        ModelAndView mv = new ModelAndView();
+    @ResponseBody
+    public Map<String, Object> userList() {
+        Map<String, Object> map = new HashMap<>();
         List<User> users = userRepository.findAll();
-        mv.addObject("users", users);
-        mv.setViewName("user.btl");
-        return mv;
+        map.put("users", users);
+        return map;
     }
+
+//    @RequestMapping
+//    public ModelAndView userList() {
+//        ModelAndView mv = new ModelAndView();
+//        List<User> users = userRepository.findAll();
+//        System.out.println(users.get(0).getUsername()+"users");
+//        mv.addObject("users",users);
+//        mv.setViewName("user.btl");
+//        return mv;
+//    }
 
     @RequestMapping("/api")
     @ResponseBody
@@ -114,7 +124,7 @@ public class UserController {
     @HttpConstraint
     public String Check(HttpServletRequest request) throws IOException{
         String name =request.getParameter("name");
-        User un = userRepository.findByName(name);
+        User un = userRepository.findByUsername(name);
         if (un == null)
         {
             return "enable";
@@ -180,9 +190,9 @@ public class UserController {
             }
             List<User> list1 = new ArrayList<>();
            User excelUploadStudent1 = new User();
-            excelUploadStudent1.password = a[0];
-            excelUploadStudent1.name = a[1];
-            excelUploadStudent1.id = 0;
+            excelUploadStudent1.setPassword(a[0]);
+            excelUploadStudent1.setLastname(a[1]);
+            excelUploadStudent1.setId(Long.parseLong("0"));
             list1.add(excelUploadStudent1);
             userRepository.save(excelUploadStudent1);
 
@@ -190,9 +200,9 @@ public class UserController {
 
             for (i = 0; i < listStudets; i++) {
                 User excelUploadStudent = new User();
-                excelUploadStudent.password = students.get(i).get(a[0]);
-                excelUploadStudent.name = students.get(i).get(a[1]);
-                excelUploadStudent.id = 0;
+                excelUploadStudent.setPassword(students.get(i).get(a[0]));
+                excelUploadStudent.setLastname(students.get(i).get(a[1]));
+                excelUploadStudent.setId(Long.parseLong("0"));
                 list1.add(excelUploadStudent);
                 userRepository.save(excelUploadStudent);
             }

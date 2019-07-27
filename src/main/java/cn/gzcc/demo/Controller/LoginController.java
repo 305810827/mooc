@@ -16,4 +16,9 @@ public class LoginController {
     public String login() {
         return "login.btl";
     }
+
+//    @GetMapping("/user1")
+//    public String user() {
+//        return "user.btl";
+//    }
 }

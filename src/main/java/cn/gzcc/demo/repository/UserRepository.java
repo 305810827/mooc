@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface UserRepository extends JpaRepository<User,Integer> {
 
-    User findByName(String name);
+    User findByUsername(String username);
 
     @Query(value = "SELECT * FROM user WHERE id =?1 or name like %?1% or password like %?1% or phone like %?1% or address like %?1% or birthday like %?1% or sex like %?1% or username like %?1%",nativeQuery = true)
     public List<User> nativeQuery(String name);

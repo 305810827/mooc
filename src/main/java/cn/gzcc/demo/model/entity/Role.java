@@ -42,15 +42,15 @@ public class Role {
     }
 
 
-    @OneToMany(mappedBy = "role")
-    private List<User> users =new ArrayList<>();
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    @JsonBackReference
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
+//    @OneToMany(mappedBy = "role")
+//    private List<User> users =new ArrayList<>();
+//
+//    public List<User> getUsers() {
+//        return users;
+//    }
+//
+//    @JsonBackReference
+//    public void setUsers(List<User> users) {
+//        this.users = users;
+//    }
 }

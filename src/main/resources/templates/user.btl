@@ -13,9 +13,9 @@
     <title>信息管理</title>
 
     <!-- Icons -->
-    <link href="vendors/css/flag-icon.min.css" rel="stylesheet">
-    <link href="vendors/css/font-awesome.min.css" rel="stylesheet">
-    <link href="vendors/css/simple-line-icons.min.css" rel="stylesheet">
+    <link href="css/flag-icon.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/simple-line-icons.min.css" rel="stylesheet">
 
     <!-- Main styles for this application -->
     <link href="css/style.css" rel="stylesheet">
@@ -171,11 +171,11 @@
                 <div class="btn-group" role="group" aria-label="Button group">
                     <a class="btn" href="#"><i class="icon-speech"></i></a>
                     <!--<button type="button" class="btn btn-info" data-toggle="modal" data-target="#infoModal">-->
-                        <!--创建用户-->
+                    <!--创建用户-->
                     <!--</button>-->
                     <!--<input type="file" id="file"/>-->
                     <!--<button type="button" class="btn btn-info"  id="input1">-->
-                        <!--导入用户-->
+                    <!--导入用户-->
                     <!--</button>-->
                     <a class="btn" href="#"><i class="icon-settings"></i> &nbsp;设置</a>
                 </div>
@@ -192,7 +192,7 @@
                                 <i class="fa fa-align-justify"></i> 用户列表
                             </div>
                             <div class="card-body">
-                                <form id="user-form2" action="//search" method="post">
+                                <form id="user-form2" action="/search" method="post">
                                     <div class="form-group row" style="padding-right: 750px;">
                                         <div class="col-md-12">
                                             <div class="input-group">
@@ -547,7 +547,7 @@
             </div>
 
             <div class="modal-body">
-                <form id="user-form"  method="post">
+                <form id="user-form" method="post">
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -576,34 +576,34 @@
                     </div>
 
 
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-asterisk"></i></span>
-                                </div>
-                                <input type="text" id="phone" name="phone" class="form-control" placeholder="电话">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-asterisk"></i></span>
                             </div>
+                            <input type="text" id="phone" name="phone" class="form-control" placeholder="电话">
                         </div>
+                    </div>
 
 
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-asterisk"></i></span>
-                                </div>
-                                <input type="text" id="address" name="address" class="form-control" placeholder="地址">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-asterisk"></i></span>
                             </div>
+                            <input type="text" id="address" name="address" class="form-control" placeholder="地址">
                         </div>
+                    </div>
 
 
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-asterisk"></i></span>
-                                </div>
-                                <input type="date" id="birthday" name="birthday" class="form-control" placeholder="出生日期">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-asterisk"></i></span>
                             </div>
+                            <input type="date" id="birthday" name="birthday" class="form-control" placeholder="出生日期">
                         </div>
+                    </div>
 
                     <div class="form-group">
                         <div class="input-group">
@@ -612,22 +612,23 @@
                             </div>
                             <table id="sex" border="0">
                                 <tbody>
-                            <input type="radio" name="sex" value="男">男
-                            <input type="radio" name="sex" value="女">女
-                                </tbody></table>
+                                <input type="radio" name="sex" value="男">男
+                                <input type="radio" name="sex" value="女">女
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
 
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-asterisk"></i></span>
-                                </div>
-                                <td>用户名</td>
-                                <input type="text" id="username" name="username" class="form-control" placeholder="用户名">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-asterisk"></i></span>
                             </div>
+                            <td>用户名</td>
+                            <input type="text" id="username" name="username" class="form-control" placeholder="用户名">
                         </div>
+                    </div>
                 </form>
             </div>
 
@@ -693,31 +694,30 @@
         <thead>
         <tr>
             <th>账号</th>
-            <th>密码</th>
-            <th>昵称</th>
+            <th>初始昵称</th>
+            <th>现在昵称</th>
             <th>角色</th>
-            <!--<th>电话</th>-->
-            <!--<th>出生年月日</th>-->
-            <!--<th>性别</th>-->
-            <!--<th>地址</th>-->
+            <th>邮箱</th>
+            <th>性别</th>
+            <th>账号状态</th>
             <th>操作</th>
-            <th><button type="button" class="btn btn-danger" onclick="deletes()">
-                批量删除
-            </button></th>
+            <th>
+                <button type="button" class="btn btn-danger" onclick="deletes()">
+                    批量删除
+                </button>
+            </th>
         </tr>
         </thead>
         <tbody>
         {{each items item index}}
         <tr>
-            <td>{{item.name}}</td>
-            <td>{{item.password}}</td>
             <td>{{item.username}}</td>
-            <td>{{item.role.descriptin}}</td>
-            <!--<td>{{item.phone}}</td>-->
-            <!--<td>{{item.birthday}}</td>-->
-            <!--<td>{{item.sex}}</td>-->
-            <!--<td>{{item.address}}</td>-->
-
+            <td>{{item.firstname}}</td>
+            <td>{{item.lastname}}</td>
+            <td>{{item.role_id}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.sex}}</td>
+            <td>{{item.enabled}}</td>
             <td>
                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#infoModal"
                         data-whatever="{{index}}">
@@ -739,13 +739,12 @@
 
 
 <!-- Bootstrap and necessary plugins -->
-<script src="vendors/js/jquery.min.js"></script>
-<script src="vendors/js/popper.min.js"></script>
-<script src="vendors/js/bootstrap.min.js"></script>
-<script src="vendors/js/pace.min.js"></script>
-
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/pace.min.js"></script>
 <!-- Plugins and scripts required by all views -->
-<script src="vendors/js/Chart.min.js"></script>
+<script src="js/Chart.min.js"></script>
 
 <!-- CoreUI main scripts -->
 
@@ -753,29 +752,45 @@
 <script src="js/art-template-web.js"></script>
 
 <script>
-    var users = ${json(users)};
     var userIndex = -1;
-    //ajax
-//    $.ajax({
-//        type: "GET",   //提交的方法
-//        url: "/user/api", //提交的地址
-//        error: function (request) {  //失败的话
-//            alert("Connection error");
-//        },
-//        success: function (result) {  //成功
-//            users = result;
-//            //关闭模态框
-//
-//            var html = template('user-list-template', {
-//                items: users
-//            });
-//            document.getElementById('user-list').innerHTML = html;
-//        }
-//    });
-            var html = template('user-list-template', {
-                items: users
-            });
-            document.getElementById('user-list').innerHTML = html;
+    var TOKEN_KEY="Authorization";
+
+    function getJwtToken(){
+        return localStorage.getItem(TOKEN_KEY);
+    }
+
+    function createAuthorizationTokenHeader(){
+        var token = getJwtToken();
+        if(token){
+            return {"Authorization": token};
+        }else{
+            return {};
+        }
+    }
+   $.ajax({
+       type: "GET",   //提交的方法
+       url: "/user", //提交的地址
+       contentType: "application/json; charset=utf-8",
+       dataType: "html",
+       headers:createAuthorizationTokenHeader(),
+       success: function (result) {  //成功
+           var resultObject = JSON.parse(result);
+           users = resultObject.users;
+           console.log(users)
+           var html = template('user-list-template', {
+               items: users
+           });
+           document.getElementById('user-list').innerHTML = html;
+       },
+       error: function (request) {  //失败的话
+            alert("Connection error");
+       }
+   });
+
+    // var html = template('user-list-template', {
+    //     items: users
+    // });
+    // document.getElementById('user-list').innerHTML = html;
 
 
     $('#infoModal').on('show.bs.modal', function (event) {
@@ -794,8 +809,7 @@
             modal.find('.modal-body input#birthday').val("");
             modal.find('.modal-body input#sex').val("");
             modal.find('.modal-body input#address').val("");
-        }
-        else {
+        } else {
             userIndex = recipient;
             var user = users[userIndex];
             modal.find('.modal-body input#id').val(user.id);
@@ -844,8 +858,7 @@
 
                 if (userIndex == -1) {
                     users.push(user);
-                }
-                else {
+                } else {
                     users[userIndex] = user;
                 }
                 var html = template('user-list-template', {
@@ -898,54 +911,55 @@
             }
         });
     });
-var btnExcel = document.getElementById("input1")
+    var btnExcel = document.getElementById("input1")
     btnExcel.onclick = function () {
         var file = document.getElementById("file")
         var formData = new FormData();
-        formData.append("file",file.files[0]);
+        formData.append("file", file.files[0]);
         $.ajax({
             type: "post",
 
 
             url: "user/excelUpload",
             data: formData,
-            processData : false,
-            contentType : false ,
-            success:function () {
+            processData: false,
+            contentType: false,
+            success: function () {
                 alert("导入成功");
             },
-            error:function () {
+            error: function () {
 
             }
         })
     }
-    function deletes()
-    {
+
+    function deletes() {
         var list = [];
         var test = $("input[name='del']:checked");
-        for(i=0;i<test.length;i++){
+        for (i = 0; i < test.length; i++) {
             list.push(users[test[i].value].id);
         }
         var listjson = JSON.stringify(list);
         $.ajax({
             type: "post",   //提交的方法
             url: "/user/deletes", //提交的地址
-            data:{"args":list},
-            traditional:true,
+            data: {"args": list},
+            traditional: true,
 
-            success: function(user) {  //成功
+            success: function (user) {  //成功
                 //关闭模态框
 
                 // 用户列表删除用户信息
-                for(i=0;i<test.length;i++){
-                    users.splice(test[i].value,1);
+                for (i = 0; i < test.length; i++) {
+                    users.splice(test[i].value, 1);
                 }
 
                 var html = template('user-list-template', {
                     items: users
                 });
                 document.getElementById('user-list').innerHTML = html;
-                alert('删除成功！！！');window.location.href='/user';
+                alert('删除成功！！！');
+                window.location.href = '/user';
             }
         });
     }

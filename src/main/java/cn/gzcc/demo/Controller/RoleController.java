@@ -2,18 +2,13 @@ package cn.gzcc.demo.Controller;
 
 import cn.gzcc.demo.model.entity.User;
 import cn.gzcc.demo.repository.UserRepository;
-import cn.gzcc.demo.utils.TokenUtils;
+import cn.gzcc.demo.security.utils.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * Created by lenovo on 2018/4/28.
@@ -28,23 +23,39 @@ public class RoleController {
     private UserRepository userRepository;
 
     @RequestMapping
-    public String loginSuccess(HttpServletRequest request)
+    @ResponseBody
+    public Integer loginSuccess(HttpServletRequest request)
     {
         String token = request.getHeader(tokenHeader);
-        TokenUtils tokenUtils = new TokenUtils();
-        String username = tokenUtils.getUsernameFromToken(token);
-        System.out.println("username"+username);
+        JwtTokenUtil jwttokenUtil = new JwtTokenUtil();
+        String username = jwttokenUtil.getUsernameFromToken(token);
         User UserInfo = userRepository.getUserFromDatabase(username);
-        if (UserInfo.getRole().getRoleId() == 1){
-            return "redirect:/user/";
-        }
-        else if (UserInfo.getRole().getRoleId() == 2) {
-            return "redirect:/courseList/";
-        }
-        else if(UserInfo.getRole().getRoleId() == 3){
-            return "redirect:/course/";
-        }
-        return null;
+//        if (UserInfo.getRole().getRoleId() == 1){
+//            System.out.println("UserInfo.getRole().getRoleId()"+UserInfo.getRole().getRoleId());
+//            return "user.btl";
+//        }
+//        else if (UserInfo.getRole().getRoleId() == 2) {
+//            return "redirect:/loginSuccess/courseList";
+//        }
+//        else if(UserInfo.getRole().getRoleId() == 3){
+//            return "redirect:/loginSuccess/course";
+//        }
+        return UserInfo.getRole().getRoleId();
+    }
+
+    @RequestMapping(value = "/user")
+    public String User(){
+        return "user.btl";
+    }
+
+    @RequestMapping(value = "/courseList")
+    public String CourseList(){
+        return "courseList.btl";
+    }
+
+    @RequestMapping(value = "/course")
+    public String Course(){
+        return "course.btl";
     }
 
 //    @RequestMapping
