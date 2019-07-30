@@ -32,7 +32,7 @@ public class CourseController {
 
 
     @RequestMapping
-    public ModelAndView Page(@RequestParam(defaultValue = "1")int pageNum) {
+    public ModelAndView Page(@RequestParam(defaultValue = "1")int pageNum,String username) {
         ModelAndView mv = new ModelAndView();
         int pageSize = 2;
         //在这里就要将PageBean中的数据创建好，然后将该对象传回去，
@@ -51,6 +51,7 @@ public class CourseController {
         mv.addObject("courses", courses);
         mv.addObject("chapters", chapters);
         mv.addObject("sections", sections);
+        mv.addObject("username", username);
         mv.setViewName("courseManager.btl");
         return mv;
     }

@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="/mooc/css2/mooc.css">
 
 
-    <script src="../mooc1/js/jquery.min.js" type="text/javascript"></script>
-    <script src="../mooc1/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+    <script src="/mooc1/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/mooc1/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
 
 </head>
 <body>

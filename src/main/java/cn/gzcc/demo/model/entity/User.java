@@ -12,34 +12,32 @@ import javax.validation.constraints.Size;
 public class User {
 
     @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
-    @SequenceGenerator(name = "user_seq", sequenceName = "user_seq", allocationSize = 1)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @Column(name = "USERNAME", length = 50, unique = true)
     @NotNull
-    @Size(min = 4, max = 50)
+    @Size(min = 1, max = 50)
     private String username;
 
     @Column(name = "PASSWORD", length = 100)
     @NotNull
-    @Size(min = 4, max = 100)
+    @Size(min = 1, max = 100)
     private String password;
 
     @Column(name = "FIRSTNAME", length = 50)
     @NotNull
-    @Size(min = 4, max = 50)
+    @Size(min = 1, max = 50)
     private String firstname;
 
     @Column(name = "LASTNAME", length = 50)
     @NotNull
-    @Size(min = 4, max = 50)
+    @Size(min = 1, max = 50)
     private String lastname;
 
     @Column(name = "EMAIL", length = 50)
     @NotNull
-    @Size(min = 4, max = 50)
+    @Size(min = 1, max = 50)
     private String email;
 
     @Column(name = "ENABLED")
@@ -51,16 +49,22 @@ public class User {
     @NotNull
     private Date lastPasswordResetDate;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "USER_AUTHORITY",
-            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
-            inverseJoinColumns = {@JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID")})
-    private List<Authority> authorities;
-
     @ManyToOne
     @NotNull
     private Role role;
+
+    public User(){}
+
+    public User(String username,String password,String firstname,String lastname,String email,Boolean enabled,Date lastPasswordResetDate,Role role){
+        this.username = username;
+        this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.enabled = enabled;
+        this.lastPasswordResetDate = lastPasswordResetDate;
+        this.role = role;
+    }
 
     public Role getRole() {
         return role;
@@ -70,11 +74,11 @@ public class User {
         this.role = role;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -126,13 +130,6 @@ public class User {
         this.enabled = enabled;
     }
 
-    public List<Authority> getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(List<Authority> authorities) {
-        this.authorities = authorities;
-    }
 
     public Date getLastPasswordResetDate() {
         return lastPasswordResetDate;

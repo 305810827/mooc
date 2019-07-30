@@ -15,10 +15,11 @@ public class LinkController {
     private SectionRepository sectionRepository;
 
     @RequestMapping
-    public ModelAndView content(int id){
+    public ModelAndView content(int id,String username){
         ModelAndView mv = new ModelAndView();
         Section section = sectionRepository.getOne(id);
         mv.addObject("section",section);
+        mv.addObject("username",username);
         mv.setViewName("linkcontent.btl");
         return mv;
     }

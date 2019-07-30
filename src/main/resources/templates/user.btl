@@ -7,8 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
     <meta name="author" content="Łukasz Holeczek">
-    <meta name="keyword"
-          content="Bootstrap,Admin,Template,Open,Source,AngularJS,Angular,Angular2,Angular 2,Angular4,Angular 4,jQuery,CSS,HTML,RWD,Dashboard,React,React.js,Vue,Vue.js">
+    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,AngularJS,Angular,Angular2,Angular 2,Angular4,Angular 4,jQuery,CSS,HTML,RWD,Dashboard,React,React.js,Vue,Vue.js">
     <link rel="shortcut icon" href="img/favicon.png">
     <title>信息管理</title>
 
@@ -70,16 +69,7 @@
         </li>
     </ul>
     <ul class="nav navbar-nav ml-auto">
-        <li class="nav-item d-md-down-none">
-            <a class="nav-link" href="#"><i class="icon-bell"></i><span
-                    class="badge badge-pill badge-danger">5</span></a>
-        </li>
-        <li class="nav-item d-md-down-none">
-            <a class="nav-link" href="#"><i class="icon-list"></i></a>
-        </li>
-        <li class="nav-item d-md-down-none">
-            <a class="nav-link" href="#"><i class="icon-location-pin"></i></a>
-        </li>
+        <text>欢迎回来,${username}</text>
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                aria-expanded="false">
@@ -87,72 +77,31 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right">
                 <div class="dropdown-header text-center">
-                    <strong>Account</strong>
-                </div>
-                <a class="dropdown-item" href="#"><i class="fa fa-bell-o"></i> Updates<span
-                        class="badge badge-info">42</span></a>
-                <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> Messages<span
-                        class="badge badge-success">42</span></a>
-                <a class="dropdown-item" href="#"><i class="fa fa-tasks"></i> Tasks<span
-                        class="badge badge-danger">42</span></a>
-                <a class="dropdown-item" href="#"><i class="fa fa-comments"></i> Comments<span
-                        class="badge badge-warning">42</span></a>
-                <div class="dropdown-header text-center">
                     <strong>Settings</strong>
                 </div>
-                <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
-                <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Settings</a>
-                <a class="dropdown-item" href="#"><i class="fa fa-usd"></i> Payments<span class="badge badge-secondary">42</span></a>
-                <a class="dropdown-item" href="#"><i class="fa fa-file"></i> Projects<span class="badge badge-primary">42</span></a>
-                <div class="divider"></div>
-                <a class="dropdown-item" href="#"><i class="fa fa-shield"></i> Lock Account</a>
-                <a class="dropdown-item" href="#"><i class="fa fa-lock"></i> Logout</a>
+                <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> 设置个人信息</a>
+                <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal"><i class="fa fa-lock"></i> 退出登陆</a>
             </div>
         </li>
     </ul>
-    <button class="navbar-toggler aside-menu-toggler" type="button">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
 </header>
 
 <div class="app-body">
     <div class="sidebar">
         <nav class="sidebar-nav">
             <ul class="nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html"><i class="icon-speedometer"></i> Dashboard <span
-                            class="badge badge-primary">NEW</span></a>
-                </li>
-
                 <li class="nav-title">
                     用户
                 </li>
-
-
                 <li class="nav-item nav-dropdown">
                     <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-pencil"></i> 用户管理</a>
                     <ul class="nav-dropdown-items">
                         <li class="nav-item">
-                            <a class="nav-link" href="/user"><i class="icon-puzzle"></i> 用户信息管理</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/user"><i class="icon-puzzle"></i> 管理员信息管理</a>
+                            <a class="nav-link" href="/loginSuccess/user?username=${username}" ><i
+                                    class="icon-puzzle"></i> 用户信息管理</a>
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item nav-dropdown">
-                    <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-pencil"></i> 资讯信息管理</a>
-
-                </li>
-                <li class="nav-item nav-dropdown">
-                    <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-pencil"></i> 评论信息管理</a>
-
-                </li>
-                <li class="nav-item nav-dropdown">
-                    <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-pencil"></i> 分类信息管理</a>
-                </li>
-
             </ul>
         </nav>
         <button class="sidebar-minimizer brand-minimizer" type="button"></button>
@@ -169,22 +118,24 @@
             <!-- Breadcrumb Menu-->
             <li class="breadcrumb-menu d-md-down-none">
                 <div class="btn-group" role="group" aria-label="Button group">
-                    <a class="btn" href="#"><i class="icon-speech"></i></a>
-                    <!--<button type="button" class="btn btn-info" data-toggle="modal" data-target="#infoModal">-->
-                    <!--创建用户-->
-                    <!--</button>-->
-                    <!--<input type="file" id="file"/>-->
-                    <!--<button type="button" class="btn btn-info"  id="input1">-->
-                    <!--导入用户-->
-                    <!--</button>-->
-                    <a class="btn" href="#"><i class="icon-settings"></i> &nbsp;设置</a>
+                    <!--<a class="btn" href="#"><i class="icon-speech"></i></a>-->
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#infoModal">
+                        创建用户
+                    </button>
+                    <!--<a class="btn" href="#"><i class="icon-settings"></i> &nbsp;设置</a>-->
                 </div>
+                <div class="btn-group" role="group" aria-label="Button group">
+                    <input type="file" id="file"/>
+                    <button type="button" class="btn btn-info" id="input1">
+                        导入用户
+                    </button>
+                </div>
+
             </li>
         </ol>
 
         <div class="container-fluid">
             <div class="animated fadeIn">
-                <a class="icon-home" href="/user"></a>
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
@@ -192,16 +143,15 @@
                                 <i class="fa fa-align-justify"></i> 用户列表
                             </div>
                             <div class="card-body">
-                                <form id="user-form2" action="/search" method="post">
+                                <form id="user-form2">
                                     <div class="form-group row" style="padding-right: 750px;">
                                         <div class="col-md-12">
                                             <div class="input-group">
                                                 <input type="text" id="name2" name="name2" class="form-control"
-                                                       placeholder="用户名">
+                                                       placeholder="请输入关键词">
                                                 <span class="input-group-prepend">
-                            <button type="button" id="search" class="btn btn-primary"><i
-                                    class="fa fa-search"></i> 搜索</button>
-                          </span>
+                                                <button type="button" id="search" class="btn btn-primary"><i class="fa fa-search"></i> 搜索</button>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -231,305 +181,7 @@
         </div>
         <!-- /.conainer-fluid -->
     </main>
-
-    <aside class="aside-menu">
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#timeline" role="tab"><i class="icon-list"></i></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#messages" role="tab"><i class="icon-speech"></i></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#settings" role="tab"><i class="icon-settings"></i></a>
-            </li>
-        </ul>
-
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <div class="tab-pane active" id="timeline" role="tabpanel">
-                <div class="callout m-0 py-2 text-muted text-center bg-light text-uppercase">
-                    <small><b>Today</b></small>
-                </div>
-                <hr class="transparent mx-3 my-0">
-                <div class="callout callout-warning m-0 py-3">
-                    <div class="avatar float-right">
-                        <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                    </div>
-                    <div>Meeting with
-                        <strong>Lucas</strong>
-                    </div>
-                    <small class="text-muted mr-3"><i class="icon-calendar"></i>&nbsp; 1 - 3pm</small>
-                    <small class="text-muted"><i class="icon-location-pin"></i>&nbsp; Palo Alto, CA</small>
-                </div>
-                <hr class="mx-3 my-0">
-                <div class="callout callout-info m-0 py-3">
-                    <div class="avatar float-right">
-                        <img src="img/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                    </div>
-                    <div>Skype with
-                        <strong>Megan</strong>
-                    </div>
-                    <small class="text-muted mr-3"><i class="icon-calendar"></i>&nbsp; 4 - 5pm</small>
-                    <small class="text-muted"><i class="icon-social-skype"></i>&nbsp; On-line</small>
-                </div>
-                <hr class="transparent mx-3 my-0">
-                <div class="callout m-0 py-2 text-muted text-center bg-light text-uppercase">
-                    <small><b>Tomorrow</b></small>
-                </div>
-                <hr class="transparent mx-3 my-0">
-                <div class="callout callout-danger m-0 py-3">
-                    <div>New UI Project -
-                        <strong>deadline</strong>
-                    </div>
-                    <small class="text-muted mr-3"><i class="icon-calendar"></i>&nbsp; 10 - 11pm</small>
-                    <small class="text-muted"><i class="icon-home"></i>&nbsp; creativeLabs HQ</small>
-                    <div class="avatars-stack mt-2">
-                        <div class="avatar avatar-xs">
-                            <img src="img/avatars/2.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                        </div>
-                        <div class="avatar avatar-xs">
-                            <img src="img/avatars/3.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                        </div>
-                        <div class="avatar avatar-xs">
-                            <img src="img/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                        </div>
-                        <div class="avatar avatar-xs">
-                            <img src="img/avatars/5.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                        </div>
-                        <div class="avatar avatar-xs">
-                            <img src="img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                        </div>
-                    </div>
-                </div>
-                <hr class="mx-3 my-0">
-                <div class="callout callout-success m-0 py-3">
-                    <div>
-                        <strong>#10 Startups.Garden</strong> Meetup
-                    </div>
-                    <small class="text-muted mr-3"><i class="icon-calendar"></i>&nbsp; 1 - 3pm</small>
-                    <small class="text-muted"><i class="icon-location-pin"></i>&nbsp; Palo Alto, CA</small>
-                </div>
-                <hr class="mx-3 my-0">
-                <div class="callout callout-primary m-0 py-3">
-                    <div>
-                        <strong>Team meeting</strong>
-                    </div>
-                    <small class="text-muted mr-3"><i class="icon-calendar"></i>&nbsp; 4 - 6pm</small>
-                    <small class="text-muted"><i class="icon-home"></i>&nbsp; creativeLabs HQ</small>
-                    <div class="avatars-stack mt-2">
-                        <div class="avatar avatar-xs">
-                            <img src="img/avatars/2.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                        </div>
-                        <div class="avatar avatar-xs">
-                            <img src="img/avatars/3.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                        </div>
-                        <div class="avatar avatar-xs">
-                            <img src="img/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                        </div>
-                        <div class="avatar avatar-xs">
-                            <img src="img/avatars/5.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                        </div>
-                        <div class="avatar avatar-xs">
-                            <img src="img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                        </div>
-                        <div class="avatar avatar-xs">
-                            <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                        </div>
-                        <div class="avatar avatar-xs">
-                            <img src="img/avatars/8.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                        </div>
-                    </div>
-                </div>
-                <hr class="mx-3 my-0">
-            </div>
-            <div class="tab-pane p-3" id="messages" role="tabpanel">
-                <div class="message">
-                    <div class="py-3 pb-5 mr-3 float-left">
-                        <div class="avatar">
-                            <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                            <span class="avatar-status badge-success"></span>
-                        </div>
-                    </div>
-                    <div>
-                        <small class="text-muted">Lukasz Holeczek</small>
-                        <small class="text-muted float-right mt-1">1:52 PM</small>
-                    </div>
-                    <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-                    <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt...
-                    </small>
-                </div>
-                <hr>
-                <div class="message">
-                    <div class="py-3 pb-5 mr-3 float-left">
-                        <div class="avatar">
-                            <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                            <span class="avatar-status badge-success"></span>
-                        </div>
-                    </div>
-                    <div>
-                        <small class="text-muted">Lukasz Holeczek</small>
-                        <small class="text-muted float-right mt-1">1:52 PM</small>
-                    </div>
-                    <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-                    <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt...
-                    </small>
-                </div>
-                <hr>
-                <div class="message">
-                    <div class="py-3 pb-5 mr-3 float-left">
-                        <div class="avatar">
-                            <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                            <span class="avatar-status badge-success"></span>
-                        </div>
-                    </div>
-                    <div>
-                        <small class="text-muted">Lukasz Holeczek</small>
-                        <small class="text-muted float-right mt-1">1:52 PM</small>
-                    </div>
-                    <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-                    <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt...
-                    </small>
-                </div>
-                <hr>
-                <div class="message">
-                    <div class="py-3 pb-5 mr-3 float-left">
-                        <div class="avatar">
-                            <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                            <span class="avatar-status badge-success"></span>
-                        </div>
-                    </div>
-                    <div>
-                        <small class="text-muted">Lukasz Holeczek</small>
-                        <small class="text-muted float-right mt-1">1:52 PM</small>
-                    </div>
-                    <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-                    <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt...
-                    </small>
-                </div>
-                <hr>
-                <div class="message">
-                    <div class="py-3 pb-5 mr-3 float-left">
-                        <div class="avatar">
-                            <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                            <span class="avatar-status badge-success"></span>
-                        </div>
-                    </div>
-                    <div>
-                        <small class="text-muted">Lukasz Holeczek</small>
-                        <small class="text-muted float-right mt-1">1:52 PM</small>
-                    </div>
-                    <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-                    <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt...
-                    </small>
-                </div>
-            </div>
-            <div class="tab-pane p-3" id="settings" role="tabpanel">
-                <h6>Settings</h6>
-
-                <div class="aside-options">
-                    <div class="clearfix mt-4">
-                        <small><b>Option 1</b></small>
-                        <label class="switch switch-text switch-pill switch-success switch-sm float-right">
-                            <input type="checkbox" class="switch-input" checked="">
-                            <span class="switch-label" data-on="On" data-off="Off"></span>
-                            <span class="switch-handle"></span>
-                        </label>
-                    </div>
-                    <div>
-                        <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        </small>
-                    </div>
-                </div>
-
-                <div class="aside-options">
-                    <div class="clearfix mt-3">
-                        <small><b>Option 2</b></small>
-                        <label class="switch switch-text switch-pill switch-success switch-sm float-right">
-                            <input type="checkbox" class="switch-input">
-                            <span class="switch-label" data-on="On" data-off="Off"></span>
-                            <span class="switch-handle"></span>
-                        </label>
-                    </div>
-                    <div>
-                        <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        </small>
-                    </div>
-                </div>
-
-                <div class="aside-options">
-                    <div class="clearfix mt-3">
-                        <small><b>Option 3</b></small>
-                        <label class="switch switch-text switch-pill switch-success switch-sm float-right">
-                            <input type="checkbox" class="switch-input">
-                            <span class="switch-label" data-on="On" data-off="Off"></span>
-                            <span class="switch-handle"></span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="aside-options">
-                    <div class="clearfix mt-3">
-                        <small><b>Option 4</b></small>
-                        <label class="switch switch-text switch-pill switch-success switch-sm float-right">
-                            <input type="checkbox" class="switch-input" checked="">
-                            <span class="switch-label" data-on="On" data-off="Off"></span>
-                            <span class="switch-handle"></span>
-                        </label>
-                    </div>
-                </div>
-
-                <hr>
-                <h6>System Utilization</h6>
-
-                <div class="text-uppercase mb-1 mt-4">
-                    <small><b>CPU Usage</b></small>
-                </div>
-                <div class="progress progress-xs">
-                    <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25"
-                         aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <small class="text-muted">348 Processes. 1/4 Cores.</small>
-
-                <div class="text-uppercase mb-1 mt-2">
-                    <small><b>Memory Usage</b></small>
-                </div>
-                <div class="progress progress-xs">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: 70%" aria-valuenow="70"
-                         aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <small class="text-muted">11444GB/16384MB</small>
-
-                <div class="text-uppercase mb-1 mt-2">
-                    <small><b>SSD 1 Usage</b></small>
-                </div>
-                <div class="progress progress-xs">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: 95%" aria-valuenow="95"
-                         aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <small class="text-muted">243GB/256GB</small>
-
-                <div class="text-uppercase mb-1 mt-2">
-                    <small><b>SSD 2 Usage</b></small>
-                </div>
-                <div class="progress progress-xs">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 10%" aria-valuenow="10"
-                         aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <small class="text-muted">25GB/256GB</small>
-            </div>
-        </div>
-    </aside>
-
 </div>
-
 <footer class="app-footer">
     <span><a href="http://coreui.io">CoreUI</a> © 2018 creativeLabs.</span>
     <span class="ml-auto">Powered by <a href="http://coreui.io">CoreUI</a></span>
@@ -545,7 +197,6 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-
             <div class="modal-body">
                 <form id="user-form" method="post">
                     <div class="form-group">
@@ -554,7 +205,8 @@
                                 <span class="input-group-text"><i class="fa fa-user"></i></span>
                             </div>
                             <input type="hidden" id="id" name="id">
-                            <input type="text" id="name" name="name" class="form-control" placeholder="用户账号">
+                            <text>用户名</text>
+                            <input type="text" id="username" name="username" class="form-control" placeholder="用户名">
                         </div>
                     </div>
                     <div class="form-group">
@@ -562,76 +214,39 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-asterisk"></i></span>
                             </div>
+                            <text>昵称</text>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="昵称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-asterisk"></i></span>
+                            </div>
+                            <text>密码</text>
                             <input type="password" id="password" name="password" class="form-control" placeholder="密码">
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-asterisk"></i></span>
+                            </div>
+                            <text>邮箱</text>
+                            <input type="text" id="email" name="email" class="form-control" placeholder="邮箱">
+                        </div>
+                    </div>
+                    <text>身份</text>
                     <div class="col-md-9">
-                        <select id="role.id" name="role.id" class="form-control">
+                        <select id="role_id" name="role_id" class="form-control">
                             <option value="0">请选择身份</option>
                             <option value="1">学生</option>
                             <option value="2">老师</option>
                             <option value="3">管理员</option>
                         </select>
                     </div>
-
-
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa fa-asterisk"></i></span>
-                            </div>
-                            <input type="text" id="phone" name="phone" class="form-control" placeholder="电话">
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa fa-asterisk"></i></span>
-                            </div>
-                            <input type="text" id="address" name="address" class="form-control" placeholder="地址">
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa fa-asterisk"></i></span>
-                            </div>
-                            <input type="date" id="birthday" name="birthday" class="form-control" placeholder="出生日期">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa fa-asterisk"></i></span>
-                            </div>
-                            <table id="sex" border="0">
-                                <tbody>
-                                <input type="radio" name="sex" value="男">男
-                                <input type="radio" name="sex" value="女">女
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa fa-asterisk"></i></span>
-                            </div>
-                            <td>用户名</td>
-                            <input type="text" id="username" name="username" class="form-control" placeholder="用户名">
-                        </div>
-                    </div>
                 </form>
             </div>
-
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
                 <button type="button" id="save" class="btn btn-info">保存</button>
@@ -646,7 +261,6 @@
      style="display: none;">
     <div class="modal-dialog modal-danger" role="document">
         <div class="modal-content">
-            <form id="user-form1" action="/user/delete" method="post">
                 <div class="modal-header">
                     <h4 class="modal-title">确定删除该用户吗</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -658,23 +272,13 @@
                         <thead>
                         <tr>
                             <th>用户账号</th>
-                            <th>密码</th>
                             <th>昵称</th>
-                            <th>电话</th>
-                            <th>出生年月日</th>
-                            <th>性别</th>
-                            <th>地址</th>
                         </tr>
                         </thead>
                         <tr>
                             <input type="hidden" id="id1" name="id1">
-                            <td type="text" id="name1" name="name1"></td>
-                            <td type="text" id="password1" name="password1"></td>
                             <td type="text" id="username1" name="username1"></td>
-                            <td type="text" id="phone1" name="phone1"></td>
-                            <td type="text" id="birthday1" name="birthday1"></td>
-                            <td type="text" id="sex1" name="sex1"></td>
-                            <td type="text" id="address1" name="address1"></td>
+                            <td type="text" id="name1" name="name1"></td>
                         </tr>
                     </table>
                 </div>
@@ -682,12 +286,32 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
                     <button type="button" id="delete" class="btn btn-danger">确定</button>
                 </div>
-            </form>
         </div>
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
 </div>
+
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+     style="display: none;">
+    <div class="modal-dialog modal-danger" role="document">
+        <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">确定退出登陆吗</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" id="logout" class="btn btn-danger">确定</button>
+                </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
 
 <script id="user-list-template" type="text/html">
     <table class="table table-bordered table-striped table-sm">
@@ -698,7 +322,6 @@
             <th>现在昵称</th>
             <th>角色</th>
             <th>邮箱</th>
-            <th>性别</th>
             <th>账号状态</th>
             <th>操作</th>
             <th>
@@ -714,9 +337,8 @@
             <td>{{item.username}}</td>
             <td>{{item.firstname}}</td>
             <td>{{item.lastname}}</td>
-            <td>{{item.role_id}}</td>
+            <td>{{item.role_role_id}}</td>
             <td>{{item.email}}</td>
-            <td>{{item.sex}}</td>
             <td>{{item.enabled}}</td>
             <td>
                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#infoModal"
@@ -753,45 +375,50 @@
 
 <script>
     var userIndex = -1;
-    var TOKEN_KEY="Authorization";
+    var TOKEN_KEY = "Authorization";
 
-    function getJwtToken(){
+    function getJwtToken() {
         return localStorage.getItem(TOKEN_KEY);
     }
 
-    function createAuthorizationTokenHeader(){
+    function removeJwtToken() {
+        localStorage.removeItem(TOKEN_KEY);
+    }
+
+    function createAuthorizationTokenHeader() {
         var token = getJwtToken();
-        if(token){
+        if (token) {
             return {"Authorization": token};
-        }else{
+        } else {
             return {};
         }
     }
-   $.ajax({
-       type: "GET",   //提交的方法
-       url: "/user", //提交的地址
-       contentType: "application/json; charset=utf-8",
-       dataType: "html",
-       headers:createAuthorizationTokenHeader(),
-       success: function (result) {  //成功
-           var resultObject = JSON.parse(result);
-           users = resultObject.users;
-           console.log(users)
-           var html = template('user-list-template', {
-               items: users
-           });
-           document.getElementById('user-list').innerHTML = html;
-       },
-       error: function (request) {  //失败的话
+
+    $.ajax({
+        type: "GET",   //提交的方法
+        url: "/user", //提交的地址
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        headers: createAuthorizationTokenHeader(),
+        success: function (result) {  //成功
+            // var resultObject = JSON.parse(result);
+
+            console.log(result);
+            users = result.users;
+            var html = template('user-list-template', {
+                items: users
+            });
+            document.getElementById('user-list').innerHTML = html;
+        },
+        error: function (request) {  //失败的话
             alert("Connection error");
-       }
-   });
+        }
+    });
 
-    // var html = template('user-list-template', {
-    //     items: users
-    // });
-    // document.getElementById('user-list').innerHTML = html;
-
+    $('#logout').click(function () {
+        removeJwtToken();
+        self.location.href = "/login" ;
+    });
 
     $('#infoModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
@@ -802,24 +429,20 @@
         if (recipient == null) {
             userIndex = -1;
             modal.find('.modal-body input#id').val(0);
+            modal.find('.modal-body input#username').val("");
             modal.find('.modal-body input#name').val("");
             modal.find('.modal-body input#password').val("");
-            modal.find('.modal-body input#username').val("");
-            modal.find('.modal-body input#phone').val("");
-            modal.find('.modal-body input#birthday').val("");
-            modal.find('.modal-body input#sex').val("");
-            modal.find('.modal-body input#address').val("");
+            modal.find('.modal-body input#email').val("");
+            modal.find('.modal-body select#role_id').val(0);
         } else {
             userIndex = recipient;
             var user = users[userIndex];
             modal.find('.modal-body input#id').val(user.id);
-            modal.find('.modal-body input#name').val(user.name);
-            modal.find('.modal-body input#password').val(user.password);
             modal.find('.modal-body input#username').val(user.username);
-            modal.find('.modal-body input#phone').val(user.phone);
-            modal.find('.modal-body input#birthday').val(user.birthday);
-            modal.find('.modal-body input#sex').val(user.sex);
-            modal.find('.modal-body input#address').val(user.address);
+            modal.find('.modal-body input#name').val(user.lastname);
+            modal.find('.modal-body input#password').val(user.password);
+            modal.find('.modal-body input#email').val(user.email);
+            modal.find('.modal-body select#role_id').val(user.role.roleId);
         }
     })
 
@@ -829,16 +452,13 @@
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
         var modal = $(this)
-
         var user = users[recipient]
+        console.log(user);
+        console.log(user.id);
         modal.find('.modal-body input#id1').val(user.id);
-        modal.find('.modal-body td#name1').text(user.name)
-        modal.find('.modal-body td#password1').text(user.password)
         modal.find('.modal-body td#username1').text(user.username);
-        modal.find('.modal-body td#phone1').text(user.phone);
-        modal.find('.modal-body td#birthday1').text(user.birthday);
-        modal.find('.modal-body td#sex1').text(user.sex);
-        modal.find('.modal-body td#address1').text(user.address);
+        modal.find('.modal-body td#name1').text(user.lastname)
+
     })
 
     $("#save").click(function () {
@@ -846,13 +466,21 @@
         $.ajax({
             type: "POST",   //提交的方法
             url: "/user/save", //提交的地址
-            data: $('#user-form').serialize(),// 序列化表单值
-
+            dataType: "json",
+            data: {
+                username: $('#username').val(),
+                name: $('#name').val(),
+                password: $('#password').val(),
+                roleId: $('#role_id').val(),
+                email: $('#email').val()
+            },// 序列化表单值
+            headers: createAuthorizationTokenHeader(),
             error: function (request) {  //失败的话
                 alert("Connection error");
             },
             success: function (user) {  //成功n
                 //关闭模态框
+                alert("操作成功")
                 $('#infoModal').modal('hide');
                 //用户列表显示新增的用户信息
 
@@ -873,9 +501,12 @@
     $("#delete").click(function () {
         //ajax
         $.ajax({
-            type: "POST",   //提交的方法
+            type: "GET",   //提交的方法
             url: "/user/delete", //提交的地址
-            data: $('#user-form1').serialize(),// 序列化表单值
+            headers: createAuthorizationTokenHeader(),
+            data: {
+                id:$('#id1').val()
+            },// 序列化表单值
             error: function (request) {  //失败的话
                 alert("Connection error");
             },
@@ -892,12 +523,44 @@
         });
     });
 
+    function deletes() {
+        var list = [];
+        var test = $("input[name='del']:checked");
+        for (i = 0; i < test.length; i++) {
+            list.push(users[test[i].value].id);
+        }
+        var listjson = JSON.stringify(list);
+        $.ajax({
+            type: "post",   //提交的方法
+            url: "/user/deletes", //提交的地址
+            data: {"args": list},
+            traditional: true,
+            success: function (user) {  //成功
+                //关闭模态框
+                // 用户列表删除用户信息
+                for (i = 0; i < test.length; i++) {
+                    users.splice(test[i].value, 1);
+                }
+                var html = template('user-list-template', {
+                    items: users
+                });
+                document.getElementById('user-list').innerHTML = html;
+                alert('删除成功！！！');
+                // window.location.href = '/user';
+            }
+        });
+    };
+
     $("#search").click(function () {
         //ajax
+        console.log($('#name2').val());
         $.ajax({
             type: "GET",   //提交的方法
             url: "/user/search", //提交的地址
-            data: $('#user-form2').serialize(),// 序列化表单值
+            headers: createAuthorizationTokenHeader(),
+            data: {
+                name: $('#name2').val()
+            },// 序列化表单值
             error: function (request) {  //失败的话
                 alert("Connection error");
             },
@@ -911,6 +574,7 @@
             }
         });
     });
+
     var btnExcel = document.getElementById("input1")
     btnExcel.onclick = function () {
         var file = document.getElementById("file")
@@ -918,10 +582,9 @@
         formData.append("file", file.files[0]);
         $.ajax({
             type: "post",
-
-
             url: "user/excelUpload",
             data: formData,
+            headers: createAuthorizationTokenHeader(),
             processData: false,
             contentType: false,
             success: function () {
@@ -933,36 +596,6 @@
         })
     }
 
-    function deletes() {
-        var list = [];
-        var test = $("input[name='del']:checked");
-        for (i = 0; i < test.length; i++) {
-            list.push(users[test[i].value].id);
-        }
-        var listjson = JSON.stringify(list);
-        $.ajax({
-            type: "post",   //提交的方法
-            url: "/user/deletes", //提交的地址
-            data: {"args": list},
-            traditional: true,
-
-            success: function (user) {  //成功
-                //关闭模态框
-
-                // 用户列表删除用户信息
-                for (i = 0; i < test.length; i++) {
-                    users.splice(test[i].value, 1);
-                }
-
-                var html = template('user-list-template', {
-                    items: users
-                });
-                document.getElementById('user-list').innerHTML = html;
-                alert('删除成功！！！');
-                window.location.href = '/user';
-            }
-        });
-    }
 </script>
 
 

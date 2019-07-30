@@ -8,17 +8,16 @@
     <link rel="stylesheet" href="/mooc/css/course_list.css">
     <link rel="stylesheet" href="/mooc/css2/mooc.css">
     <!-- Icons -->
-    <link href="base/vendors/css/flag-icon.min.css" rel="stylesheet">
-    <link href="base/vendors/css/font-awesome.min.css" rel="stylesheet">
-    <link href="base/vendors/css/simple-line-icons.min.css" rel="stylesheet">
-
+    <link href="/css/flag-icon.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/simple-line-icons.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
 </head>
-<body>
-
+<body onload="checkLogin1()">
 <div id="header">
     <div class="page-container" id="nav">
-        <div id="logo" class="logo"><a href="/" target="_self" class="hide-text" title="首页">广州商学院</a></div>
+        <div id="logo" class="logo"><a href="#" target="_self" class="hide-text" title="首页">广州商学院</a></div>
         <button type="button" class="navbar-toggle visible-xs-block js-show-menu">
             <i class="icon-menu"></i>
         </button>
@@ -28,7 +27,23 @@
             <li>
                 <a href="/courseList" class="active" target="_self">免费课程</a>
             </li>
-            <li><a href="/article" target="_self">笔记</a></li>
+            <li><a href="#" target="_self">笔记</a></li>
+        </ul>
+        <ul class="nav-item" id="userInfo"  style="margin:50%,0,50%,0; float:right">
+            <li><text style="color: white">欢迎回来,${username}</text></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                   aria-expanded="false">
+                    <img src="img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <div class="dropdown-header text-center">
+                        <strong>Settings</strong>
+                    </div>
+                    <a class="dropdown-item" href="/userInfo?username=${username}" style="color: black">设置个人信息</a>
+                    <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal">退出登陆</a>
+                </div>
+            </li>
         </ul>
         <div id="login-area">
             <ul class="header-unlogin clearfix">
@@ -78,8 +93,8 @@
     <div class="course-info-menu ">
         <div class="w">
             <ul class="course-menu">
-                <li><a class="moco-change-big-btn active" id="learnOn" href="/learn/942">课程章节</a></li>
-                <li><a id="commentOn" class="moco-change-big-btn " href="/coursescore/942">用户评价</a></li>
+                <li><a class="moco-change-big-btn active" id="learnOn" href="#">课程章节</a></li>
+                <li><a id="commentOn" class="moco-change-big-btn " href="#">用户评价</a></li>
             </ul>
         </div>
     </div>
@@ -99,7 +114,7 @@
                                 <ul class="video">
                                     <% for(section in sections) { if(section.chapter.id == chapter.id){ %>
                                     <li>
-                                        <a target="_blank" href='/content?id=${section.id}' class="J-media-item studyvideo">
+                                        <a target="_blank" href='/content?id=${section.id}&username=${username}' class="J-media-item studyvideo">
                                             ${section.section_name}
                                             <i class="study-state"></i>
                                         </a>
@@ -208,5 +223,66 @@
     </div>
 </div>
 <!--content end-->
+
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+     style="display: none;">
+    <div class="modal-dialog modal-danger" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">确定退出登陆吗</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" id="logout" class="btn btn-danger">确定</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<!-- Bootstrap and necessary plugins -->
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/pace.min.js"></script>
+<!-- Plugins and scripts required by all views -->
+<script src="js/Chart.min.js"></script>
+
+<!-- CoreUI main scripts -->
+
+<script src="js/app.js"></script>
+<script src="js/art-template-web.js"></script>
+<!--content end-->
+
+<script>
+    var courses = [];
+    console.log(${username}, "username");
+    $("#userInfo").hide();
+    function checkLogin1() {
+        if (${username} != null) {
+            $("#userInfo").show();
+            $("#login-area").hide();
+        }else{
+            $("#userInfo").hide();
+            $("#login-area").show();
+        }
+    }
+
+    $('#logout').click(function () {
+        removeJwtToken();
+        self.location.href = "/login" ;
+    });
+
+    var TOKEN_KEY = "Authorization";
+
+
+    function removeJwtToken() {
+        localStorage.removeItem(TOKEN_KEY);
+    }
+</script>
 </body>
 </html>

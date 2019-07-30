@@ -47,21 +47,6 @@
                                        placeholder="密码">
                             </div>
 
-                            <table id="loginRole" border="0">
-                                <tbody>
-                                <tr>
-                                    <td><input type="radio" name="role.id" value="1">
-                                        教师
-                                    </td>
-                                    <td><input type="radio" name="role.id" value="2">
-                                        学生
-                                    </td>
-                                    <td><input type="radio" name="role.id" value="3">
-                                        管理员
-                                    </td>
-                                </tbody>
-                            </table>
-
                             <div class="row">
                                 <div class="col-6">
                                     <button type="submit" class="btn btn-primary px-4">登陆</button>
@@ -107,6 +92,9 @@
                     <div class="alert alert-success" id="noexist_alert" role="alert">
                         <strong>用户可使用</strong>
                     </div>
+                    <div class="alert alert-danger" id="username_alert" role="alert">
+                        <strong>用户名不能为空</strong>
+                    </div>
                     <div class="alert alert-success" id="backlogin" role="alert">
                         <strong>请返回到登录页面</strong>
                     </div>
@@ -114,9 +102,22 @@
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-user"></i></span></div>
-                            <input type="text" id="name" name="name" class="form-control" placeholder="用户名">
+                            <input type="text" id="username1" name="name" class="form-control" placeholder="用户名">
 
                         </div>
+                    </div>
+                    <div class="alert alert-danger" id="name_alert" role="alert">
+                        <strong>昵称不能为空</strong>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-user"></i></span></div>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="昵称">
+                        </div>
+                    </div>
+                    <div class="alert alert-danger" id="password1_alert" role="alert">
+                        <strong>密码不能为空</strong>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
@@ -127,14 +128,31 @@
                                    placeholder="输入密码">
                         </div>
                     </div>
+                    <div class="alert alert-danger" id="password2_alert" role="alert">
+                        <strong>两次密码不一致</strong>
+                    </div>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-asterisk"></i></span>
                             </div>
-
                             <input type="password" id="password2" name="password2" class="form-control"
                                    placeholder="再次输入密码">
+                        </div>
+                    </div>
+                    <div class="alert alert-danger" id="email_alert" role="alert">
+                        <strong>邮箱不能为空</strong>
+                    </div>
+                    <div class="alert alert-danger" id="emailFormat_alert" role="alert">
+                        <strong>邮箱格式不正确</strong>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-asterisk"></i></span>
+                            </div>
+                            <input type="text" id="email" name="email" class="form-control"
+                                   placeholder="请输入您的邮箱"/>
                         </div>
                     </div>
                     <!--<div class="form-group">-->
@@ -149,13 +167,13 @@
                     <table id="role" border="0">
                         <tbody>
                         <tr>
-                            <td><input type="radio" name="role.id" value="1">
+                            <td><input type="radio" name="role_id" value="1">
                                 教师
                             </td>
-                            <td><input type="radio" name="role.id" value="2">
+                            <td><input type="radio" name="role_id" value="2">
                                 学生
                             </td>
-
+                        </tr>
                         </tbody>
                     </table>
                     <div class="modal-footer">
@@ -185,84 +203,146 @@
         $("#exist_alert").hide();
         $("#noexist_alert").hide();
         $("#backlogin").hide();
-        $("#name").blur(function () {
-            var name = $("#name").val();
-            $.ajax({
-                type: "POST",
-                url:"/user/check",
-                data:{"name":name},
-                success: function (msg) {
-                    if (msg == "enable") {
-                        $("#noexist_alert").show();
-                    } else {
-                        $("#exist_alert").show();
-                    }
-                }
-            })
-            if (name == "") {
-                alert("用户名不能为空！！！");
+        $("#username_alert").hide();
+        $("#name_alert").hide();
+        $("#password1_alert").hide();
+        $("#password2_alert").hide();
+        $("#email_alert").hide();
+        $("#emailFormat_alert").hide();
+
+        $("#username1").blur(
+            function () {
+                console.log($("#username1").val(),"username1");
+                if ($("#username1").val() == "") {
+                    $("#username_alert").show();
+                    $("#noexist_alert").hide();
+                    $("#exist_alert").hide();
 //                    document.getElementById("name").focus();//通过元素的ID特性来获取元素
-                return false;
-            }
-            $("input").click(function () {
-                $("#noexist_alert").hide();
-                $("#exist_alert").hide();
-            });
-            if (password == "") {
-                alert("密码不能为空！！！");
-//                    document.getElementById("name").focus();//通过元素的ID特性来获取元素
-                return false;
-            }
-            $("input").click(function () {
-                $("#noexist_alert").hide();
-                $("#exist_alert").hide();
-            });
-        })
-
-        $("#button1").click(function () {
-            var name = $("#name").val();
-            var password1 = $("#password1").val();
-            var password2 = $("#password2").val();
-            var role = $("#role").val();
-//              var phone = document.getElementById('phone').value;
-//              var user = {name:name,password:password1,role:[{id:role}],phone:phone};
-//              var userJson = JSON.stringify(user);
-            if (password1 == "") {
-                alert("密码不能为空！！！");
-//                  document.getElementById("password1").focus();
-                return false;
-            }
-            if (password2 == "") {
-                alert("密码不能为空！！！");
-//                  document.getElementById("password2").focus();
-                return false;
-            }
-
-
-            if (password1 != password2) {
-                alert("两次密码不一致！！！");
-//                  document.getElementById("password2").focus();
-                return false;
-            }
-            $.ajax({
-                type: "POST",
-                url: "/user/save",
-                data: $('#user-form').serialize(),
-
-                success: function (msg) {
-                    if (msg == "success") {
-                        $("#backlogin").show();
-                    }
-
+                    return false;
                 }
-
+                $.ajax({
+                    type: "POST",
+                    url: "/accountIsExist",
+                    data: {"username": $("#username1").val()},
+                    success: function (msg) {
+                        console.log(msg)
+                        if (msg) {
+                            $("#noexist_alert").show();
+                            $("#exist_alert").hide();
+                            $("#username_alert").hide();
+                        } else {
+                            $("#exist_alert").show();
+                            $("#noexist_alert").hide();
+                            $("#username_alert").hide();
+                        }
+                    }
+                })
 
             })
+        // $("#username1").click(function () {
+        //     $("#noexist_alert").hide();
+        //     $("#exist_alert").hide();
+        //     $("#username_alert").hide();
+        // });
 
 
+        $("#name").blur(
+            function () {
+            if ($("#name").val() == "") {
+                $("#name_alert").show();
+            }else{
+                $("#name_alert").hide();
+            }
         });
 
 
+        $("#password1").blur(
+            function () {
+            if ($("#password1").val() == "") {
+                $("#password1_alert").show();
+            }
+            else{
+                $("#password1_alert").hide();
+            }
+        });
+
+        $("#password2").blur(function () {
+            if ($("#password2").val() !== $("#password1").val()) {
+                $("#password2_alert").show();
+            }else{
+                $("#password2_alert").hide();
+            }
+        });
+
+        $("#email").blur(function () {
+            var reg = new RegExp(/^([a-zA-Z0-9._-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/);
+            if ($("#email").val() == "") {
+                $("#email_alert").show();
+                $("#emailFormat_alert").hide();
+            } else {
+                if(reg.test($("#email").val())){
+                    $("#email_alert").hide();
+                    $("#emailFormat_alert").hide();
+                }else {
+                    $("#email_alert").hide();
+                    $("#emailFormat_alert").show();
+                }
+            }
+        });
+
+        $("#button1").click(function () {
+            var radio = $("[name=role_id]:checked").val();
+            radio = radio || "未选择";
+            if (radio == "未选择") {
+                alert("未选择用户类型！！！");
+            }
+            if($("#username1").val() == ""){
+                $("#username_alert").show();
+            }
+            if($("#name").val() == ""){
+                $("#name_alert").show();
+            }
+            if($("#password1").val() == ""){
+                $("#password1_alert").show();
+            }
+            if($("#password2").val() !== $("#password1").val()){
+                $("#password2_alert").show();
+            }
+            if($("#email").val() == ""){
+                $("#email_alert").show();
+            }
+            if( radio == "未选择" || $("#username1").val() == "" || $("#name").val() == ""||
+                $("#password1").val() == "" || $("#password2").val() == "" || $("#email").val() == "")
+            {
+                return false;
+            }
+            $.ajax({
+                type: "POST",
+                url: "/sign",
+                data: {
+                    username: $('#username1').val(),
+                    name: $('#name').val(),
+                    password: $('#password1').val(),
+                    roleId: $('[name=role_id]:checked').val(),
+                    email: $('#email').val()
+                },
+                success: function (msg) {
+                    console.log(msg);
+                    $("#username1").val("");
+                    $("#name").val("");
+                    $("#password1").val("");
+                    $("#password2").val("");
+                    $("#email").val("");
+                    $("[name=role_id]").attr("checked",false);
+                    if(msg == "success") {
+                        alert("注册成功");
+                    }
+                },
+                fail: function (msg) {
+                    alert("注册失败")
+                }
+            })
+        });
     });
 </script>
 

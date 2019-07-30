@@ -49,16 +49,8 @@ public class JwtAuthorizationTokenFilter extends OncePerRequestFilter {
 
     @Override
         protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
+
         logger.debug("processing authentication for '{}'", request.getRequestURL());
-
-
-        // 其他过滤器已经认证通过了
-//        Authentication authentication1 = SecurityContextHolder.getContext().getAuthentication();
-//        System.out.println("authentication"+authentication1+authentication1.isAuthenticated());
-//        if (authentication1 != null && authentication1.isAuthenticated()) {
-//            chain.doFilter(request, response);
-//            return;
-//        }
 
         String authToken = request.getHeader(this.tokenHeader);
         String username = null;
@@ -80,7 +72,6 @@ public class JwtAuthorizationTokenFilter extends OncePerRequestFilter {
         logger.debug("checking authentication for user '{}'", username);
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             logger.debug("security context was null, so authorizing user");
-
             // It is not compelling necessary to load the use details from the database. You could also store the information
             // in the token and read it from it. It's up to you ;)            
             UserDetails userDetails;
@@ -90,7 +81,6 @@ public class JwtAuthorizationTokenFilter extends OncePerRequestFilter {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
                 return;
             }
-
 
             // For simple validation it is completely sufficient to just check the token integrity. You don't have to call
             // the database compellingly. Again it's up to you ;)

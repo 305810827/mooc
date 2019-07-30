@@ -1,40 +1,40 @@
-//package cn.gzcc.demo.Controller;
-//
-//import cn.gzcc.demo.model.entity.User;
-//import cn.gzcc.demo.repository.UserRepository;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.web.bind.annotation.*;
-//import org.springframework.web.servlet.ModelAndView;
-//
-//
-///**
-// * Created by guoyaowen on 2018/4/26.
-// */
-//@Controller
-//@RequestMapping("/userinfo")
-//public class UserinfoController {
-//
-//    @Autowired
-//    private UserRepository userRepository;
-//
+package cn.gzcc.demo.Controller;
+
+import cn.gzcc.demo.model.entity.User;
+import cn.gzcc.demo.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+
+/**
+ * Created by guoyaowen on 2018/4/26.
+ */
+@Controller
+@RequestMapping("/userInfo")
+public class UserinfoController {
+
+    @Autowired
+    private UserRepository userRepository;
+
 //    @RequestMapping
 //    public String Content(){
 //        return "userinfo.btl";
 //    }
-//
-//
-//
-////    @RequestMapping("/save")
-////    @ResponseBody
-////    public Userinfo save(Userinfo userinfo){
-//////        userinfoRepository.save(userinfo);
-////        userinfoRepository.save(userinfo);
-////        return userinfo;
-////    }
-//
-//    @PostMapping("/save")
+
+
+
+//    @RequestMapping("/save")
 //    @ResponseBody
+//    public Userinfo save(Userinfo userinfo){
+////        userinfoRepository.save(userinfo);
+//        userinfoRepository.save(userinfo);
+//        return userinfo;
+//    }
+
+  //  @PostMapping("/save")
+  //  @ResponseBody
 //    public User save(int id,String nick_name,String birth_day,String sex,String address,String mobile){
 ////        userinfoRepository.save(userinfo);
 //        User user = userRepository.getOne(id);
@@ -46,12 +46,14 @@
 //        userRepository.save(user);
 //        return user;
 //    }
-//    public ModelAndView content(int id){
-//        ModelAndView mv = new ModelAndView();
-//        User name = userRepository.getOne(id);
-//        mv.addObject("user",name);
-//        mv.setViewName("userinfo.btl");
-//        return mv;
-//    }
-//
-//}
+
+    @RequestMapping
+    public ModelAndView content(String username){
+        ModelAndView mv = new ModelAndView();
+        User user = userRepository.getUserFromDatabase(username);
+        mv.addObject("user",user);
+        mv.setViewName("userinfo.btl");
+        return mv;
+    }
+
+}

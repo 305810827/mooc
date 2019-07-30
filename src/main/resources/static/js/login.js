@@ -34,7 +34,16 @@ $(function () {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data, textStatus, jqXHR) {
-                console.log(data);
+                console.log(data.token);
+                if(data.token === "usernameNoExist")
+                {
+                    alert("账号错误");
+                    return false;
+                }
+                else if(data.token === "falsePassword"){
+                    alert("密码错误");
+                    return false;
+                }
                 setJwtToken(data.token);
                 showUserInformation();
                 // if(data.roleId == 1){
@@ -45,6 +54,9 @@ $(function () {
                 //     showUserInformation("/course");
                 // }
 
+            },
+            fail: function (data) {
+                console.log(data);
             }
         });
     }
@@ -73,19 +85,19 @@ $(function () {
             url: "/loginSuccess",
             type: "GET",
             contentType: "application/json; charset=utf-8",
-            dataType: "html",
+            dataType: "json",
             headers: createAuthorizationTokenHeader(),
             success: function (data) {
                 //$('html').html(data);
                 console.log(data)
-                if (data == 1){
-                    self.location.href="/loginSuccess/user";
+                if (data.roleId === 1){
+                    self.location.href = "/course?username="+data.username;
                 }
-                else if (data == 2) {
-                    return "redirect:/loginSuccess/courseList";
+                else if (data.roleId === 2) {
+                    self.location.href = "/courseList?username="+data.username;
                 }
-                else if(data == 3){
-                    return "redirect:/loginSuccess/course";
+                else if(data.roleId === 3){
+                    self.location.href="/loginSuccess/user?username="+data.username;
                 }
                 //self.location.href="/user";
                 // var $userInfoBody = $userInfo.find("#userInfoBody");

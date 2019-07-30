@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by lenovo on 2018/4/28.
@@ -24,38 +27,40 @@ public class RoleController {
 
     @RequestMapping
     @ResponseBody
-    public Integer loginSuccess(HttpServletRequest request)
+    public Map<String, Object> loginSuccess(HttpServletRequest request)
     {
         String token = request.getHeader(tokenHeader);
         JwtTokenUtil jwttokenUtil = new JwtTokenUtil();
         String username = jwttokenUtil.getUsernameFromToken(token);
         User UserInfo = userRepository.getUserFromDatabase(username);
-//        if (UserInfo.getRole().getRoleId() == 1){
-//            System.out.println("UserInfo.getRole().getRoleId()"+UserInfo.getRole().getRoleId());
-//            return "user.btl";
-//        }
-//        else if (UserInfo.getRole().getRoleId() == 2) {
-//            return "redirect:/loginSuccess/courseList";
-//        }
-//        else if(UserInfo.getRole().getRoleId() == 3){
-//            return "redirect:/loginSuccess/course";
-//        }
-        return UserInfo.getRole().getRoleId();
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("roleId",UserInfo.getRole().getRoleId());
+        map.put("username",username);
+        return map;
     }
 
     @RequestMapping(value = "/user")
-    public String User(){
-        return "user.btl";
+    public ModelAndView User(String username){
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("username",username);
+        mv.setViewName("user.btl");
+        return mv;
     }
 
-    @RequestMapping(value = "/courseList")
-    public String CourseList(){
-        return "courseList.btl";
-    }
+//    @RequestMapping(value = "/courseList")
+//    public ModelAndView CourseList(String username){
+//        ModelAndView mv = new ModelAndView();
+//        mv.addObject("username",username);
+//        mv.setViewName("courseList.btl");
+//        return mv;
+//    }
 
     @RequestMapping(value = "/course")
-    public String Course(){
-        return "course.btl";
+    public ModelAndView Course(String username){
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("username",username);
+        mv.setViewName("course.btl");
+        return mv;
     }
 
 //    @RequestMapping

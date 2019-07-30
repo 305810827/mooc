@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import cn.gzcc.demo.config.AuthenticationException;
 import cn.gzcc.demo.model.vo.JwtUser;
+import cn.gzcc.demo.repository.UserRepository;
 import cn.gzcc.demo.security.JwtAuthenticationRequest;
 import cn.gzcc.demo.security.service.JwtAuthenticationResponse;
 import cn.gzcc.demo.security.service.JwtUserDetailsService;
@@ -43,6 +44,9 @@ public class ToLoginController {
     @Autowired
     //@Qualifier("jwtUserDetailsService")
     private JwtUserDetailsService jwtUserDetailsService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @RequestMapping(value = "/toLogin", method = RequestMethod.POST)
     public ResponseEntity<?> login(@RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {

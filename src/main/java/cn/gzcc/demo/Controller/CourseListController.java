@@ -30,7 +30,7 @@ public class CourseListController {
     @Autowired
     private SearchRepository searchRepository;
     @RequestMapping
-    public ModelAndView Page(@RequestParam(defaultValue = "1")int pageNum) {
+    public ModelAndView Page(@RequestParam(defaultValue = "1")int pageNum,String username) {
         ModelAndView mv = new ModelAndView();
         int pageSize = 4;
         //在这里就要将PageBean中的数据创建好，然后将该对象传回去，
@@ -45,12 +45,13 @@ public class CourseListController {
         List<Course> courses1 = courseRepository.nativeQuery(startIndex,pageSize);
         mv.addObject("pageBean", pageBean);
         mv.addObject("courses", courses1);
+        mv.addObject("username",username);
         mv.setViewName("courseList.btl");
         return mv;
     }
 
     @RequestMapping("/index")
-    public ModelAndView course(int id,@RequestParam(defaultValue = "1")int pageNum){
+    public ModelAndView course(int id,@RequestParam(defaultValue = "1")int pageNum,String username){
         ModelAndView mv = new ModelAndView();
         Course courses = courseRepository.getOne(id);
         List<Chapter> chapters = chapterRepository.nativeQuery(id);
@@ -58,6 +59,7 @@ public class CourseListController {
         mv.addObject("courses",courses);
         mv.addObject("chapters",chapters);
         mv.addObject("sections",sections);
+        mv.addObject("username",username);
         mv.setViewName("course.btl");
         return mv;
     }

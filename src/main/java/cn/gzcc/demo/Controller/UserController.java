@@ -1,6 +1,7 @@
 package cn.gzcc.demo.Controller;
 
 import cn.gzcc.demo.model.entity.User;
+import cn.gzcc.demo.repository.RoleRepository;
 import cn.gzcc.demo.repository.UserRepository;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -8,9 +9,11 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,10 +23,7 @@ import javax.servlet.annotation.HttpConstraint;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Jie on 2018/3/15.
@@ -58,6 +58,7 @@ public class UserController {
     @ResponseBody
     public List<User> listApi() {
         List<User> users = userRepository.findAll();
+
         return users;
     }
 
@@ -77,17 +78,26 @@ public class UserController {
 //        return mv;
 //    }
 
+    @Autowired
+    private RoleRepository roleRepository;
     @RequestMapping("/save")
     @ResponseBody
-    public User save(User user) {
+    public User save(@RequestParam("username")String username,
+                     @RequestParam("name")String name,
+                     @RequestParam("password")String password,
+                     @RequestParam("roleId")int roleId,
+                     @RequestParam("email")String email) {
+        System.out.println(username+name+password+roleId+email);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        User user = new User(username,encoder.encode(password),name,name,email,true,new Date(),roleRepository.findByRoleId(roleId));
         userRepository.save(user);
         return user;
     }
 
-    @RequestMapping("/delete")
+    @RequestMapping(value = "/delete",method = RequestMethod.GET)
     @ResponseBody
-    public List<User> delete(int id1) {
-        userRepository.deleteById(id1);
+    public List<User> delete(int id) {
+        userRepository.deleteById(id);
         List<User> users = userRepository.findAll();
         return users;
     }
@@ -101,14 +111,6 @@ public class UserController {
         return "redirect:/user";
     }
 
-//    @RequestMapping("/edit")
-//    public ModelAndView edit(int id){
-//        User users = userRepository.getOne(id);
-//        ModelAndView mv = new ModelAndView();
-//        mv.addObject("user",users);
-//        mv.setViewName("user-edit-form.btl");
-//        return mv;
-//    }nh
 
 //    @RequestMapping("/search")
 //    public ModelAndView searchList(String name2){
@@ -118,30 +120,37 @@ public class UserController {
 //        mv.setViewName("Upload.btl");
 //        return mv;
 //    }
+//
+//    @RequestMapping(value = {"/check"},method ={RequestMethod.POST})
+//    @ResponseBody
+//    @HttpConstraint
+//    public String Check(HttpServletRequest request) throws IOException{
+//        String name =request.getParameter("name");
+//        User un = userRepository.findByUsername(name);
+//        if (un == null)
+//        {
+//            return "enable";
+//        }
+//        else {
+//            return "exist";
+//        }
+//
+//    }
 
-    @RequestMapping(value = {"/check"},method ={RequestMethod.POST})
+
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
     @ResponseBody
-    @HttpConstraint
-    public String Check(HttpServletRequest request) throws IOException{
-        String name =request.getParameter("name");
-        User un = userRepository.findByUsername(name);
-        if (un == null)
-        {
-            return "enable";
+    public List<User> search(String name) {
+        List<User> users = new ArrayList<>();
+        System.out.println(name);
+        if(name == null || name == ""){
+            users = userRepository.findAll();
+        }else{
+            users = userRepository.nativeQuery(name);
         }
-        else {
-            return "exist";
-        }
-
-    }
-
-
-    @RequestMapping("/search")
-    @ResponseBody
-    public List<User> search(String name2) {
-        List<User> users = userRepository.nativeQuery(name2);
         return users;
     }
+
     @RequestMapping("excelUpload")
     @ResponseBody
     public int excelUpload(MultipartFile file) {
@@ -189,10 +198,10 @@ public class UserController {
                 a[i] = indexRow.getCell(i).getStringCellValue();
             }
             List<User> list1 = new ArrayList<>();
-           User excelUploadStudent1 = new User();
+            User excelUploadStudent1 = new User();
             excelUploadStudent1.setPassword(a[0]);
             excelUploadStudent1.setLastname(a[1]);
-            excelUploadStudent1.setId(Long.parseLong("0"));
+            excelUploadStudent1.setId(0);
             list1.add(excelUploadStudent1);
             userRepository.save(excelUploadStudent1);
 
@@ -202,7 +211,7 @@ public class UserController {
                 User excelUploadStudent = new User();
                 excelUploadStudent.setPassword(students.get(i).get(a[0]));
                 excelUploadStudent.setLastname(students.get(i).get(a[1]));
-                excelUploadStudent.setId(Long.parseLong("0"));
+                excelUploadStudent.setId(0);
                 list1.add(excelUploadStudent);
                 userRepository.save(excelUploadStudent);
             }

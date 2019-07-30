@@ -3,34 +3,38 @@ package cn.gzcc.demo.model.vo;
 import cn.gzcc.demo.model.entity.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by stephan on 20.03.16.
  */
 public class JwtUser implements UserDetails {
 
-    private final Long id;
+    private final int id;
     private final String username;
     private final String firstname;
     private final String lastname;
     private final String password;
     private final String email;
-    private final Collection<? extends GrantedAuthority> authorities;
     private final boolean enabled;
+    private Role role;
     private final Date lastPasswordResetDate;
 
     public JwtUser(
-          Long id,
+          int id,
           String username,
           String firstname,
           String lastname,
           String email,
-          String password, Collection<? extends GrantedAuthority> authorities,
+          String password,
           boolean enabled,
+          Role role,
           Date lastPasswordResetDate
     ) {
         this.id = id;
@@ -39,13 +43,13 @@ public class JwtUser implements UserDetails {
         this.lastname = lastname;
         this.email = email;
         this.password = password;
-        this.authorities = authorities;
         this.enabled = enabled;
+        this.role = role;
         this.lastPasswordResetDate = lastPasswordResetDate;
     }
 
     @JsonIgnore
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
@@ -54,22 +58,38 @@ public class JwtUser implements UserDetails {
         return username;
     }
 
+    /**
+     * 账户是否未过期
+     */
     @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
+    /**
+     *  账户是否未锁定
+     */
     @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
+    /**
+     * 密码是否未过期
+     */
     @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
+    }
+
+    /** 账户是否激活
+     */
+    @Override
+    public boolean isEnabled() {
+        return enabled;
     }
 
     public String getFirstname() {
@@ -91,13 +111,11 @@ public class JwtUser implements UserDetails {
     }
 
     @Override
+    //返回分配给用户的角色列表
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
         return authorities;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return enabled;
     }
 
     @JsonIgnore
